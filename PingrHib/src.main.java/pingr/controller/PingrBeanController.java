@@ -26,7 +26,7 @@ public class PingrBeanController extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 		pingr.model.PingrBean pingr = new pingr.model.PingrBean();
-		// haha
+		
 		pingr.setContent("Ciao ragazzi!");
 		pingr.setCategory("Gossip");
 		pingr.setUp_vote(2);
