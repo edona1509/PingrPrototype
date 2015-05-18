@@ -88,6 +88,7 @@ function initialize() {
     handleNoGeolocation(false);
   }
   
+  // hahahah
   
   // Create the search box and link it to the UI element.
   var input = /** @type {HTMLInputElement} */(
