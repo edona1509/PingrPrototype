@@ -60,12 +60,10 @@
 
 
 
-
-
-
 #floatRightBitch{
     float: right;
     padding: 2%;
+    position: fixed;
     
 }   
 
