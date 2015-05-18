@@ -55,12 +55,19 @@
 	  	    });
 	  	    
 	  	  var myinfowindow = new google.maps.InfoWindow({
-	  		   content: ping[0]
-	  			 	  });
+	  		   content: " "//ping[0]
+	  		});
 	  	  
 	  	 google.maps.event.addListener(marker, 'click', function() {
-	  			 this.infowindow.open(map,this);
-	  				  	 });
+	  		 
+	  		 infowindow.setContent('<p>Ping: '+ this.ping[0] +'</p>'+
+	  				'<button onclick="myFunction()"> Up vote </button>'	+
+	  				'<button onclick="myFunction()"> Down vote </button>'
+	  		 
+	  		 );
+	  		 
+	  		 
+	  			infowindow.open(map,this); });
 	  	  }
 	  	}
 	  	

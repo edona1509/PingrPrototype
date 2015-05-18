@@ -23,9 +23,9 @@
       		var lon;
       		
 			function initialize() {
-			var mapOptions = {
+		/* 	var mapOptions = {
 			    zoom: 8
-			  };
+			  }; */
 			 
 			  map = new google.maps.Map(document.getElementById('map-canvas'), mapOptions);
 			
