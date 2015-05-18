@@ -1,9 +1,12 @@
 package pingr.model;
 
 
+import java.util.List;
+
 import pingr.model.PingrBean;
 import pingr.util.HibernateUtil;
 
+import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 
@@ -45,11 +48,42 @@ public class PingrManager {
 		// start transaction
 		session.beginTransaction();
 		// Save the Model object
-		PingrBean user =  (PingrBean)session.get(PingrBean.class,id);
+		PingrBean entry =  (PingrBean)session.get(PingrBean.class,id);
 		// Commit transaction
 		session.getTransaction().commit();
 		
-		return user;
+		return entry;
+	}
+
+	public static List<PingrBean> getAllInfo(){
+		
+				// Get Session
+				SessionFactory sessionFactory = HibernateUtil.getSessionAnnotationFactory();
+				Session session = sessionFactory.getCurrentSession();
+				// start transaction
+				session.beginTransaction();
+				
+				
+//				// Save the Model object
+//				PingrBean user =  (PingrBean)session.get(PingrBean.class,id);
+				
+				String hql = "FROM PingrBean";
+				Query query = session.createQuery(hql);
+				
+				List<PingrBean> results = query.list();
+				// session.createCriteria(PingrBean.class).list();
+
+				for(int i=0;i<results.size();i++){
+				   
+					//System.out.println(results.get(i));
+					PingrBean pingr = (PingrBean) results.get(i);
+					System.out.println(pingr);
+				}
+				
+				// Commit transaction
+				session.getTransaction().commit();
+				
+				return results;
 	}
 	
 }
