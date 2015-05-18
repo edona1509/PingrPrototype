@@ -1,0 +1,44 @@
+body{
+    background-color: #4B494C;
+}
+
+#wrap{
+    background-color: #4B494C;
+}
+
+#headerTop{
+    width: 100%;
+    height: 15%;
+    position: fixed;
+    
+}
+
+#headerBottom{
+    width: 100%;
+    height: 15%;
+}
+
+#left{
+    float:left;
+    padding: 3%;
+}
+
+#center{
+    padding:3%;
+    color: #CEC8D1;
+}
+
+#right{
+    float: right;
+    padding: 3%;
+}
+
+#map_canvas{
+    display: block;
+    width: 500px;
+    height: 500px;
+    align-content: center;
+    margin-top: 10%;
+}
+
+
