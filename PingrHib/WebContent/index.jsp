@@ -73,8 +73,7 @@
         </div>
 
 		<div class="navbar-header pull-right littleP">
-            <a href="post.jsp"><span class="glyphicon glyphicon-pencil bigger extraP">
-            </span></a>
+            <a href="post.jsp"><span class="glyphicon glyphicon-pencil bigger extraP"></span></a>
         </div>
     </div>
 </div>
@@ -91,7 +90,7 @@
 
 		<div class="navbar-header pull-right littleP">
             <a href="info.jsp"><span class="glyphicon glyphicon-info-sign bigger extraP"></span></a>
-            </span></a>
+            
         </div>
     </div>
 </div>

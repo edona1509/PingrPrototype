@@ -23,10 +23,10 @@
       		var lon;
       		
 			function initialize() {
-			  var mapOptions = {
+			var mapOptions = {
 			    zoom: 8
 			  };
-			
+			 
 			  map = new google.maps.Map(document.getElementById('map-canvas'), mapOptions);
 			
 			  // Try HTML5 geolocation
@@ -92,16 +92,17 @@
 		</script>
     
 </head>
+	
 <body>
-       
+    
 <nav class="navbar navbar-inverse navbar-fixed-top">
   <div class="container-fluid">
     <div class="navbar-header">
-      <a class="navbar-brand bottom" href="index.jsp">Pingr</a>
+      <a  href="index.jsp" class="navbar-brand bottom" >Pingr</a>
     
       
       <div id="floatRightBitch">
-    <li><a href="post.jsp"><span class="glyphicon glyphicon-pencil bigger extraP"></span></a></li>
+    <a href="post.jsp"><span class="glyphicon glyphicon-pencil bigger extraP"></span></a>
       </div>
 </div>
   </div>
@@ -140,7 +141,7 @@
     
       
       <div id="floatRightBitch">
-    <li><a href="info.jsp"><span class="glyphicon glyphicon-info-sign bigger extraP"></span></a></li>
+   	  <a href="info.jsp"><span class="glyphicon glyphicon-info-sign bigger extraP"></span></a>
      
     </div></div>
   
@@ -148,8 +149,8 @@
 </nav>
 
 	</form>
-	 
-	<div id="map-canvas"></div>
+	    <div id="map-canvas"></div> 
+
   </body>
  </html>
 

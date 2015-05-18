@@ -51,8 +51,16 @@
 	  	    var marker = new google.maps.Marker({
 	  	        position: myLatLng,
 	  	        map: map,
-	  	        title: ping[0]
+	  	        infowindow: myinfowindow
 	  	    });
+	  	    
+	  	  var myinfowindow = new google.maps.InfoWindow({
+	  		   content: ping[0]
+	  			 	  });
+	  	  
+	  	 google.maps.event.addListener(marker, 'click', function() {
+	  			 this.infowindow.open(map,this);
+	  				  	 });
 	  	  }
 	  	}
 	  	
