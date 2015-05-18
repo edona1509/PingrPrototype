@@ -51,23 +51,21 @@
 	  	    var marker = new google.maps.Marker({
 	  	        position: myLatLng,
 	  	        map: map,
-	  	        infowindow: myinfowindow
+	  	        infowindow: infowindow
 	  	    });
 	  	    
-	  	  var myinfowindow = new google.maps.InfoWindow({
-	  		   content: " "//ping[0]
+	  	  var infowindow = new google.maps.InfoWindow({
+	  		   content: " "
 	  		});
 	  	  
 	  	 google.maps.event.addListener(marker, 'click', function() {
 	  		 
-	  		 infowindow.setContent('<p>Ping: '+ this.ping[0] +'</p>'+
-	  				'<button onclick="myFunction()"> Up vote </button>'	+
-	  				'<button onclick="myFunction()"> Down vote </button>'
+	  	 	 infowindow.setContent('<p>Ping: '+ ping[0] +'</p>'+
+	  				'<button onclick="upvote()"> Up vote </button>'	+
+	  				'<button onclick="downvote()"> Down vote </button>'
 	  		 
-	  		 );
-	  		 
-	  		 
-	  			infowindow.open(map,this); });
+	  		 );   
+	  		 	infowindow.open(map,this); });
 	  	  }
 	  	}
 	  	
@@ -79,7 +77,8 @@
   	  var map = new google.maps.Map(document.getElementById('map-canvas'), mapOptions);
 
   	  setMarkers(map, pings);
-  	}	
+  	}
+	  
   	google.maps.event.addDomListener(window, 'load', initialize);
   	
     </script>
@@ -121,8 +120,7 @@
 </div>
   </div>
 </nav>
-
-        <div id="map-canvas" style="height: 100%, width: 100%;"></div>
+ <div id="map-canvas" style="height: 100%, width: 100%;"></div>
 
     
 <nav class="navbar navbar-inverse navbar-fixed-bottom">
