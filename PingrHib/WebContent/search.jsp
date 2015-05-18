@@ -157,13 +157,10 @@ google.maps.event.addDomListener(window, 'load', initialize);
   </head>
   <body>
   
-    <input id="pac-input" class="controls" type="text" placeholder="Search Box">
-    <div id="map-canvas"></div>
-    
-    <nav class="navbar navbar-inverse navbar-fixed-top">
+  <nav class="navbar navbar-inverse navbar-fixed-top">
   <div class="container-fluid">
     <div class="navbar-header">
-     <a class="navbar-brand bottom" href="search.jsp"></a>
+      <a class="navbar-brand bottom" href="index.jsp">Pingr</a>
     
       <div id="floatRightBitch">
     <a href="post.jsp"><span class="glyphicon glyphicon-pencil bigger extraP"></span></a>
@@ -171,7 +168,9 @@ google.maps.event.addDomListener(window, 'load', initialize);
 </div>
   </div>
 </nav>
- <div id="map-canvas" style="height: 100%, width: 100%;"></div>
+
+   <%--  <input id="pac-input" class="controls" type="text" placeholder="Search Box"> --%> 
+	 <div id="map-canvas" style="height: 100%, width: 100%;"></div>
 
     
 <nav class="navbar navbar-inverse navbar-fixed-bottom">
@@ -180,19 +179,19 @@ google.maps.event.addDomListener(window, 'load', initialize);
     <div class="navbar-header">
     
    
-    <a class="navbar-brand" href="search.jsp"><span class="glyphicon glyphicon-search bigger extraP"></span></a>
+    <a href="search.jsp" class="navbar-brand"><span class="glyphicon glyphicon-search bigger extraP"></span></a>
   
       
     <div id="floatRightBitch">
     <a href="info.jsp"><span class="glyphicon glyphicon-info-sign bigger extraP"></span></a>
       
-      </div>
-           
+         </div> 
     </div>
    
   
 </div>
 </nav>
+
   </body>
 </html>
 
