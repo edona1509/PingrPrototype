@@ -94,19 +94,18 @@
 </head>
 <body>
        
-<div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
-    <div class="container">
-        <div class="navbar-header pull-left">
-            <a class="navbar-brand" href="index.jsp">Pingr</a>
-        </div>
-
-		<div class="navbar-header pull-right littleP">
-            <a href="post.jsp"><span class="glyphicon glyphicon-pencil bigger extraP">
-            </span></a>
-        </div>
-    </div>
+<nav class="navbar navbar-inverse navbar-fixed-top">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <a class="navbar-brand bottom" href="index.jsp">Pingr</a>
+    
+      
+      <div id="floatRightBitch">
+    <li><a href="post.jsp"><span class="glyphicon glyphicon-pencil bigger extraP"></span></a></li>
+      </div>
 </div>
-
+  </div>
+</nav>
     <form method="get" action="/PingrHib/PingrBeanController">  
     <div id="pingPost">
         
@@ -134,21 +133,23 @@
            
         </div>
     
-<div class="navbar navbar-inverse navbar-fixed-bottom" role="navigation">
-    <div class="container">
-        <div class="navbar-header pull-left">
-            <a href="search.jsp" class="navbar-brand"><span class="glyphicon glyphicon-search bigger extraP"></span></a>
-        </div>
-
-		<div class="navbar-header pull-right littleP">
-            <a href="info.jsp"><span class="glyphicon glyphicon-info-sign bigger extraP"></span></a>
-            </span></a>
-        </div>
-    </div>
+<nav class="navbar navbar-inverse navbar-fixed-bottom">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <a class="navbar-brand" href="#"><span class="glyphicon glyphicon-search bigger extraP"></span></a>
+    
+      
+      <div id="floatRightBitch">
+    <li><a href="info.jsp"><span class="glyphicon glyphicon-info-sign bigger extraP"></span></a></li>
+     
+    </div></div>
+  
 </div>
+</nav>
 
-	</form> <!-- Updating -->
-
+	</form>
+	 
+	<div id="map-canvas"></div>
   </body>
  </html>
 

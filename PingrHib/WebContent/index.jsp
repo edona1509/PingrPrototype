@@ -100,5 +100,5 @@
 </body>
     
 
-</html> <!-- SHIT -->
+</html> 
 

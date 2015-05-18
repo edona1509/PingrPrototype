@@ -19,7 +19,7 @@
   <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
  
  <script type="text/javascript">
-   var pings = [];
+  var pings = [];
  </script>
 
   <c:forEach items="${pingrList}" var="element">  
@@ -35,57 +35,36 @@
   	  var lat = '${element.latitude}';
 	  var lon = '${element.longitude}';
 	  var content = '${element.content}';
-	 
+	  
 	  pings.push([content,lat,lon]);
  
-	 
-	 function setMarkers(map, locations) {
+	  function setMarkers(map, locations) {
 	  	  // Add markers to the map
 	  	  // Marker sizes are expressed as a Size of X,Y
 	  	  // where the origin of the image (0,0) is located
 	  	  // in the top left of the image.
 
 	  	  for (var i = 0; i < locations.length; i++) {
-	  	   
-	  		var ping = locations[i];
+	  	    var ping = locations[i];
 	  	    var myLatLng = new google.maps.LatLng(ping[1], ping[2]);
 	  	   
-	  	  var marker = new google.maps.Marker({
+	  	    var marker = new google.maps.Marker({
 	  	        position: myLatLng,
 	  	        map: map,
-	  	     	infowindow: myinfowindow
+	  	        title: ping[0]
 	  	    });
-	  	   
-	   	  var myinfowindow = new google.maps.InfoWindow({
-	 	      content: ping[0]
-	 	  });
-	   	  
-		  
-		  	 google.maps.event.addListener(marker, 'click', function() {
-			
-		  		 this.infowindow.open(map,this);
-		  	 });
-	   	
 	  	  }
-	  
-	  	  
 	  	}
-	  
-
 	  	
 	  function initialize() {
-  	  
-		  var mapOptions = {
-			  	    zoom: 7,
-			  	    center: new google.maps.LatLng(46.498295, 11.354758)
-			  	  }
-		 var map = new google.maps.Map(document.getElementById('map-canvas'), mapOptions);
-		 
-  	  setMarkers(map, pings);
+  	  var mapOptions = {
+  	    zoom: 7,
+  	    center: new google.maps.LatLng(46.498295, 11.354758)
+  	  }
+  	  var map = new google.maps.Map(document.getElementById('map-canvas'), mapOptions);
 
-  	
+  	  setMarkers(map, pings);
   	}	
-	  
   	google.maps.event.addDomListener(window, 'load', initialize);
   	
     </script>
