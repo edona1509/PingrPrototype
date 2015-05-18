@@ -86,7 +86,7 @@
     <div class="navbar-header">
     
    
-    <a class="navbar-brand" href="search.jsp"><span class="glyphicon glyphicon-search bigger extraP"></span></a>
+    <a href="search.jsp" class="navbar-brand"><span class="glyphicon glyphicon-search bigger extraP"></span></a>
   
       
     <div id="floatRightBitch">
