@@ -1,198 +1,158 @@
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-    pageEncoding="ISO-8859-1"%>
-
 <!DOCTYPE html>
-<html>
-  <head>
-    <meta name="viewport" content="initial-scale=1.0, user-scalable=no">
-    <meta charset="utf-8">
-    <style>
-      html, body, #map-canvas {
-        height: 100%;
-        margin: 0px;
-        padding: 0px
-      }
-      .controls {
-        margin-top: 16px;
-        border: 1px solid transparent;
-        border-radius: 2px 0 0 2px;
-        box-sizing: border-box;
-        -moz-box-sizing: border-box;
-        height: 32px;
-        outline: none;
-        box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
-      }
+<html lang="en">
+<head>
+  <title>Pingr</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="booty.css">
+  <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css"> 
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+  <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+    
+     <script src="https://maps.googleapis.com/maps/api/js"> </script>
+  	  <script type="text/javascript">
+  	  
+  	
+      var map;
+      function initialize() {
 
-      #pac-input {
-        background-color: #fff;
-        font-family: Roboto;
-        font-size: 15px;
-        font-weight: 300;
-        margin-left: 12px;
-        padding: 0 11px 0 13px;
-        text-overflow: ellipsis;
-        width: 400px;
-      }
+    	  var markers = [];
+    	   
+    	  var map = new google.maps.Map(document.getElementById('map-canvas'), {
+    	    mapTypeId: google.maps.MapTypeId.ROADMAP
+    	  });
 
-      #pac-input:focus {
-        border-color: #4d90fe;
-      }
+    	  
+    	  // Try HTML5 geolocation
+    	  if(navigator.geolocation) {
+    	    navigator.geolocation.getCurrentPosition(function(position) { 
+    	  
+    	  var defaultBounds = new google.maps.LatLngBounds(new google.maps.LatLng(position.coords.latitude,
+    	          position.coords.longitude), new google.maps.LatLng(position.coords.latitude+1,
+    			          position.coords.longitude+1));
+    	  map.fitBounds(defaultBounds); 
 
-      .pac-container {
-        font-family: Roboto;
-      }
+    	    }, function() {
+    	      handleNoGeolocation(true);
+    	    });
+    	  } else {
+    	    // Browser doesn't support Geolocation
+    	    handleNoGeolocation(false);
+    	  }
+    	  
+    	  // hahahah
+    	  
+    	  // Create the search box and link it to the UI element.
+    	  var input = /** @type {HTMLInputElement} */(
+    	      document.getElementById('pac-input'));
+    	  map.controls[google.maps.ControlPosition.TOP_LEFT].push(input);
 
-      #type-selector {
-        color: #fff;
-        background-color: #4d90fe;
-        padding: 5px 11px 0px 11px;
-      }
+    	  var searchBox = new google.maps.places.SearchBox(/** @type {HTMLInputElement} */(input));
 
-      #type-selector label {
-        font-family: Roboto;
-        font-size: 13px;
-        font-weight: 300;
-      }
+    	  // [START region_getplaces]
+    	  // Listen for the event fired when the user selects an item from the
+    	  // pick list. Retrieve the matching places for that item.
+    	  google.maps.event.addListener(searchBox, 'places_changed', function() {
+    	    var places = searchBox.getPlaces();
 
-    </style>
-    <title>Places search box</title>
-    <script src="https://maps.googleapis.com/maps/api/js?v=3.exp&signed_in=true&libraries=places"></script>
-    <script>
-// This example adds a search box to a map, using the Google Place Autocomplete
-// feature. People can enter geographical searches. The search box will return a
-// pick list containing a mix of places and predicted search terms.
+    	    if (places.length == 0) {
+    	      return;
+    	    }
+    	    for (var i = 0, marker; marker = markers[i]; i++) {
+    	      marker.setMap(null);
+    	    }
 
-function initialize() {
+    	    // For each place, get the icon, place name, and location.
+    	    markers = [];
+    	    var bounds = new google.maps.LatLngBounds();
+    	   for (var i = 0, place; place = places[i]; i++) {
+    	      var image = {
+    	        url: place.icon,
+    	        size: new google.maps.Size(71, 71),
+    	        origin: new google.maps.Point(0, 0),
+    	        anchor: new google.maps.Point(17, 34),
+    	        scaledSize: new google.maps.Size(25, 25)
+    	      };
 
-  var markers = [];
-   
-  var map = new google.maps.Map(document.getElementById('map-canvas'), {
-    mapTypeId: google.maps.MapTypeId.ROADMAP
-  });
+    	      // Create a marker for each place.
+    	 <%--     var marker = new google.maps.Marker({
+    	        map: map,
+    	        icon: image,
+    	        title: place.name,
+    	        position: place.geometry.location
+    	      }); --%>
 
-  
-  // Try HTML5 geolocation
-  if(navigator.geolocation) {
-    navigator.geolocation.getCurrentPosition(function(position) { 
-  
-  var defaultBounds = new google.maps.LatLngBounds(new google.maps.LatLng(position.coords.latitude,
-          position.coords.longitude), new google.maps.LatLng(position.coords.latitude+1,
-		          position.coords.longitude+1));
-  map.fitBounds(defaultBounds); 
+    	     markers.push(marker);
 
-    }, function() {
-      handleNoGeolocation(true);
-    });
+    	      bounds.extend(place.geometry.location);
+    	    }
+
+    	    map.fitBounds(bounds);
+    	  });
+    	  // [END region_getplaces]
+
+    	  // Bias the SearchBox results towards places that are within the bounds of the
+    	  // current map's viewport.
+    	  google.maps.event.addListener(map, 'bounds_changed', function() {
+    	    var bounds = map.getBounds();
+    	    searchBox.setBounds(bounds);
+    	  });
+    	}
+
+    	google.maps.event.addDomListener(window, 'load', initialize);
+          
+    function detectBrowser() {
+  var useragent = navigator.userAgent;
+  var mapdiv = document.getElementById("map-canvas");
+
+  if (useragent.indexOf('iPhone') != -1 || useragent.indexOf('Android') != -1 ) {
+    mapdiv.style.width = '100%';
+    mapdiv.style.height = '100%';
   } else {
-    // Browser doesn't support Geolocation
-    handleNoGeolocation(false);
+    mapdiv.style.width = '600px';
+    mapdiv.style.height = '800px';
   }
-  
-  // hahahah
-  
-  // Create the search box and link it to the UI element.
-  var input = /** @type {HTMLInputElement} */(
-      document.getElementById('pac-input'));
-  map.controls[google.maps.ControlPosition.TOP_LEFT].push(input);
-
-  var searchBox = new google.maps.places.SearchBox(/** @type {HTMLInputElement} */(input));
-
-  // [START region_getplaces]
-  // Listen for the event fired when the user selects an item from the
-  // pick list. Retrieve the matching places for that item.
-  google.maps.event.addListener(searchBox, 'places_changed', function() {
-    var places = searchBox.getPlaces();
-
-    if (places.length == 0) {
-      return;
-    }
-    for (var i = 0, marker; marker = markers[i]; i++) {
-      marker.setMap(null);
-    }
-
-    // For each place, get the icon, place name, and location.
-    markers = [];
-    var bounds = new google.maps.LatLngBounds();
-   for (var i = 0, place; place = places[i]; i++) {
-      var image = {
-        url: place.icon,
-        size: new google.maps.Size(71, 71),
-        origin: new google.maps.Point(0, 0),
-        anchor: new google.maps.Point(17, 34),
-        scaledSize: new google.maps.Size(25, 25)
-      };
-
-      // Create a marker for each place.
- <%--     var marker = new google.maps.Marker({
-        map: map,
-        icon: image,
-        title: place.name,
-        position: place.geometry.location
-      }); --%>
-
-     markers.push(marker);
-
-      bounds.extend(place.geometry.location);
-    }
-
-    map.fitBounds(bounds);
-  });
-  // [END region_getplaces]
-
-  // Bias the SearchBox results towards places that are within the bounds of the
-  // current map's viewport.
-  google.maps.event.addListener(map, 'bounds_changed', function() {
-    var bounds = map.getBounds();
-    searchBox.setBounds(bounds);
-  });
 }
-
-google.maps.event.addDomListener(window, 'load', initialize);
-
+          detectBrowser();
+          
     </script>
-    <style>
-      #target {
-        width: 345px;
-      }
-    </style>
-  </head>
-  <body>
-  
-  <nav class="navbar navbar-inverse navbar-fixed-top">
-  <div class="container-fluid">
-    <div class="navbar-header">
-      <a class="navbar-brand bottom" href="index.jsp">Pingr</a>
     
-      <div id="floatRightBitch">
-    <a href="post.jsp"><span class="glyphicon glyphicon-pencil bigger extraP"></span></a>
-      </div>
-</div>
-  </div>
-</nav>
+</head>
+<body>
 
-   <%--  <input id="pac-input" class="controls" type="text" placeholder="Search Box"> --%> 
-	 <div id="map-canvas" style="height: 100%, width: 100%;"></div>
+<div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+    <div class="container">
+        <div class="navbar-header pull-left">
+            <a class="navbar-brand" href="index.jsp">Pingr</a>
+        </div>
 
-    
-<nav class="navbar navbar-inverse navbar-fixed-bottom">
-  <div class="container-fluid">
-   
-    <div class="navbar-header">
-    
-   
-    <a href="search.jsp" class="navbar-brand"><span class="glyphicon glyphicon-search bigger extraP"></span></a>
-  
-      
-    <div id="floatRightBitch">
-    <a href="info.jsp"><span class="glyphicon glyphicon-info-sign bigger extraP"></span></a>
-      
-         </div> 
+		<div class="navbar-header pull-right littleP">
+            <a href="post.jsp"><span class="glyphicon glyphicon-pencil bigger extraP"></span></a>
+        </div>
     </div>
-   
-  
 </div>
-</nav>
+       
+  <input id="pac-input" class="controls" type="text" placeholder="Search Box"> 
 
-  </body>
-</html>
+ <div id="map-canvas" style="height: 100%, width: 100%;"></div>
+
+
+<div class="navbar navbar-inverse navbar-fixed-bottom" role="navigation">
+    <div class="container">
+        <div class="navbar-header pull-left">
+            <a href="search.jsp" class="navbar-brand"><span class="glyphicon glyphicon-search bigger extraP"></span></a>
+        </div>
+
+		<div class="navbar-header pull-right littleP">
+            <a href="info.jsp"><span class="glyphicon glyphicon-info-sign bigger extraP"></span></a>
+            
+        </div>
+    </div>
+</div>
+    
+
+</body>
+    
+
+</html> 
 

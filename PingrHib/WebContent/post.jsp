@@ -4,7 +4,7 @@
   <title>Pingr</title>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="booty.css">
+    <link rel="stylesheet" href="pingrStyleSheet.css">
   <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css"> 
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
   <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
@@ -95,18 +95,18 @@
 	
 <body>
     
-<nav class="navbar navbar-inverse navbar-fixed-top">
-  <div class="container-fluid">
-    <div class="navbar-header">
-      <a  href="index.jsp" class="navbar-brand bottom" >Pingr</a>
-    
-      
-      <div id="floatRightBitch">
-    <a href="post.jsp"><span class="glyphicon glyphicon-pencil bigger extraP"></span></a>
-      </div>
+<div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+    <div class="container">
+        <div class="navbar-header pull-left">
+            <a class="navbar-brand" href="index.jsp">Pingr</a>
+        </div>
+
+		<div class="navbar-header pull-right littleP">
+            <a href="post.jsp"><span class="glyphicon glyphicon-pencil bigger extraP"></span></a>
+        </div>
+    </div>
 </div>
-  </div>
-</nav>
+
     <form method="get" action="/PingrHib/PingrBeanController">  
     <div id="pingPost">
         
@@ -134,22 +134,21 @@
            
         </div>
     
-<nav class="navbar navbar-inverse navbar-fixed-bottom">
-  <div class="container-fluid">
-    <div class="navbar-header">
-      <a class="navbar-brand" href="#"><span class="glyphicon glyphicon-search bigger extraP"></span></a>
-    
-      
-      <div id="floatRightBitch">
-   	  <a href="info.jsp"><span class="glyphicon glyphicon-info-sign bigger extraP"></span></a>
-     
-    </div></div>
-  
+<div class="navbar navbar-inverse navbar-fixed-bottom" role="navigation">
+    <div class="container">
+        <div class="navbar-header pull-left">
+            <a href="search.jsp" class="navbar-brand"><span class="glyphicon glyphicon-search bigger extraP"></span></a>
+        </div>
+
+		<div class="navbar-header pull-right littleP">
+            <a href="info.jsp"><span class="glyphicon glyphicon-info-sign bigger extraP"></span></a>
+            
+        </div>
+    </div>
 </div>
-</nav>
 
 	</form>
-	    <div id="map-canvas"></div> 
+	    <div id="map-canvas" style="height: 1%, width: 1%;"></div>
 
   </body>
  </html>

@@ -1,38 +1,100 @@
-body{
-    background-color: #4B494C;
+.glyphicon.bigger {font-size: 20px;}
+
+.extraP{
+    padding: 10%; 
 }
 
-#wrap{
-    background-color: #4B494C;
+.littleP{
+    padding: 2%;
 }
 
-#headerTop{
+.bottom{
+    vertical-align: bottom;
+}
+
+.inTheMiddle{
+
+    text-align: center;
+}
+
+#footer{
     width: 100%;
-    height: 15%;
+    height: 20%;
+    background-color: #a1a1a1;
+    color: #ffffff;
+    text-align: center;
+    padding: 3%;
+    margin-top: 10%;
+}
+
+
+
+
+@media only screen and (min-width: 400px) {
+#map-canvas{
+    width: 100%;
+    height: 1px;
+    margin: 0 auto;
+    margin-top: 10%;
+}
+}
+
+@media only screen and (min-width: 700px) {
+    #map-canvas{
+    width: 100%;
+    height: 1px;;
+    margin: 0 auto;
+    margin-top: 10%;
+}
+
+}
+
+@media only screen and (min-width: 900px) {
+    #map-canvas{
+    display: block;
+    width: 100%;
+    height: 1px;
+    margin-top: -.001%;
+}
+}
+
+
+
+#floatRightBitch{
+    float: right;
+    padding: 2%;
     position: fixed;
     
+}   
+
+#floatLeftBitch{
+    float: left;
+    padding: 2%;
 }
 
-#headerBottom{
+#pingPost{
+    width: 80%;
+    height: 30%;
+    padding: 3%;
+    padding-top: 4%;
+    margin: 0 auto;
+    margin-top: 15%;     
+}
+
+#infoID{
+    width: 80%;
+    height: 30%;
+    padding: 3%;
+    padding-top: 4%;
+    margin: 0 auto;
+    margin-top: 15%;  
+}
+
+#mapWrap{
     width: 100%;
-    height: 15%;
-}
-
-#left{
-    float:left;
+    
     padding: 3%;
+    padding-top: .5%;
+    margin: 0 auto;
+    margin-top: 5%;  
 }
-
-#center{
-    padding:3%;
-    color: #CEC8D1;
-}
-
-#right{
-    float: right;
-    padding: 3%;
-}
-
-
-
-
