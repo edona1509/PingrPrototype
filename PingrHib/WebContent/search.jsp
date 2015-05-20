@@ -40,7 +40,7 @@
     	    handleNoGeolocation(false);
     	  }
     	  
-    	  // hahahah
+    	  // hahahah hahahahah
     	  
     	  // Create the search box and link it to the UI element.
     	  var input = /** @type {HTMLInputElement} */(
