@@ -16,7 +16,7 @@ public class SendResponse extends HttpServlet  {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-	
+	// fuck!
 //		String id = (String)request.getAttribute("idPingr");
 //		int pingID = Integer.parseInt(id);
 //		pingr.model.PingrBean pingr = PingrManager.getPingrDetails(pingID);
