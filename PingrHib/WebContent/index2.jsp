@@ -20,6 +20,7 @@
  
  <script type="text/javascript">
   var pings = [];
+
  </script>
 
   <c:forEach items="${pingrList}" var="element">  
@@ -32,11 +33,18 @@
    	 * the order in which these markers should display on top of each
    	 * other.
    	 */
-  	  var lat = '${element.latitude}';
+   	 
+
+   	 var id = '${element.pingrID}'
+     var upvote = '${element.up_vote}';
+     var downvote = '${element.down_vote}'; 
+     var cat = '${element.category}';
+	  var lat = '${element.latitude}';
 	  var lon = '${element.longitude}';
 	  var content = '${element.content}';
+
 	  
-	  pings.push([content,lat,lon]);
+	  pings.push([content, lat, lon, cat, downvote, upvote, id]);
  
 	  function setMarkers(map, locations) {
 	  	  // Add markers to the map
@@ -44,8 +52,15 @@
 	  	  // where the origin of the image (0,0) is located
 	  	  // in the top left of the image.
 
+	  	 var infowindow = new google.maps.InfoWindow();
+	  	
 	  	  for (var i = 0; i < locations.length; i++) {
+	  		  
 	  	    var ping = locations[i];
+	  	    var showContent = locations[i][0];
+	  	    var up = locations[i][5];
+	  	    var down = locations[i][4];
+	  	    var idGiusto = locations[i][6];
 	  	    var myLatLng = new google.maps.LatLng(ping[1], ping[2]);
 	  	   
 	  	    var marker = new google.maps.Marker({
@@ -54,21 +69,59 @@
 	  	        infowindow: infowindow
 	  	    });
 	  	    
-	  	  var infowindow = new google.maps.InfoWindow({
-	  		   content: ""
-	  		});
-	  	  
-	  	 google.maps.event.addListener(marker, 'click', function() {
-	  		 
-	  	 	 infowindow.setContent('<p>Ping: '+ ping[0] +'</p>'+
-	  				'<button onclick="upvote()"> Up vote </button>'	+
-	  				'<button onclick="downvote()"> Down vote </button>'
-	  		 
-	  		 );   
-	  		 	infowindow.open(map,this); });
+	  	   var showEverythig = 
+	  	    
+	  	 google.maps.event.addListener(marker, 'click',  (function(marker, showContent, up, down, idGiusto) {
+	  		  return function() {
+	                infowindow.setContent('<p>Ping: '+ showContent +'</p>'+ 
+	                		'<p id="upID" > Up: '+ up +'</p>'+
+	                		'<p id="downID" > Down: '+ down +'</p>'+
+	        				'<button onclick="voteUp('+ up + ','+ idGiusto+')"> Up vote </button>'+
+	          				'<button onclick="voteDown('+ down + ','+idGiusto+')"> Down vote </button>');
+	                infowindow.open(map, marker);
+	            }
+	  		})(marker, showContent, up, down, idGiusto));
+	 
 	  	  }
-	  	}
-	  	
+	  	  
+	 }
+	 
+	  	function voteUp(up, idGiusto) {
+			
+	  		up++;
+	  		document.getElementById('upID').innerHTML = 'Up: '+ up 
+	  		
+	  		
+			alert('Up vote!' + idGiusto);
+	  		
+
+		  document.getElementById('idGiusto').value = myID
+		  document.getElementById('up').value = newUpVote
+		
+	  		
+	  	  document.write("<form method=\"get\" action=\"/PingrHib/SendResponse\"> "+ 
+				  "  <input type=\"hidden\" id=\"idGiusto\" name=\"idGiusto\" /> " +
+				   " <input type=\"hidden\" id=\"newUpVote\" name=\"newUpVote\" /> " +
+				  " </form>");
+	  		
+	  		}
+	  	 
+		  function voteDown(down, idGiusto){
+			  
+			  down++;
+			  document.getElementById('downID').innerHTML = 'Down: '+ down 
+			  // alert('Down vote!' + down );
+			  
+			
+			  document.getElementById('idGiusto').value = myID
+		 	   document.getElementById('down').value = newDownVote
+			  document.write("<form method=\"get\" action=\"/PingrHib/SendResponse\"> "+ 
+			  "  <input type=\"hidden\" id=\"idGiusto\" name=\"idGiusto\" /> " +
+			   " <input type=\"hidden\" id=\"newDownVote\" name=\"newDownVote\" /> " +
+			  " </form>");
+		  }
+		  
+	
 	  function initialize() {
   	  var mapOptions = {
   	    zoom: 7,
@@ -79,34 +132,23 @@
   	  setMarkers(map, pings);
   	}
 	  
+	 
+	  
   	google.maps.event.addDomListener(window, 'load', initialize);
   	
     </script>
+
    
+ 
+
      </c:forEach>
     
- <!--   	
-  	<td>`${element.pingrID}`</td>
-  	<td>`${element.latitude}`</td>
-  	<td>`${element.longitude}`</td>
-  	<td>`${element.up_vote}`</td>
-  	<td>`${element.down_vote}`</td>  -->
-
 </head>
 <body>
 
  <script>
 	window.alert("Thank you for posting a Ping!");
 	</script>
-
-  <!-- 	<td>`${element.content}`</td>
-  	<td>`${element.category}`</td>
-  	<td>`${element.pingrID}`</td>
-  	<td>`${element.latitude}`</td>
-  	<td>`${element.longitude}`</td>
-  	<td>`${element.up_vote}`</td>
-  	<td>`${element.down_vote}`</td>
- -->
 
 <nav class="navbar navbar-inverse navbar-fixed-top">
   <div class="container-fluid">

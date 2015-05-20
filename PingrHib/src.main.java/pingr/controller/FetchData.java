@@ -27,6 +27,7 @@ public class FetchData extends HttpServlet {
 		
 		for(int i=0;i<pingrList.size();i++){
 			   
+			int id = pingrList.get(i).getPingrID();
 			String cont = pingrList.get(i).getContent();
 			String cat = pingrList.get(i).getCategory();
 			int up = pingrList.get(i).getUp_vote();
@@ -34,12 +35,13 @@ public class FetchData extends HttpServlet {
 			double lat = pingrList.get(i).getLatitude();
 			double lon = pingrList.get(i).getLongitude();
 			
-//			System.out.println(cont);
-//			System.out.println(cat);
-//			System.out.println(up);
-//			System.out.println(down);
-//			System.out.println(lat);
-//			System.out.println(lon);
+			System.out.println(id);
+			System.out.println(cont);
+			System.out.println(cat);
+			System.out.println(up);
+			System.out.println(down);
+			System.out.println(lat);
+			System.out.println(lon);
 			
 		}
 		

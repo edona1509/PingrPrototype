@@ -42,6 +42,18 @@ public class SendResponse extends HttpServlet  {
 //		request.setAttribute("down", down);
 		
 		//request.getRequestDispatcher("index3.jsp").forward(request, response);
+		
+		
+		pingr.model.PingrBean pingr = new pingr.model.PingrBean();
+		String id = request.getParameter("idGiusto");
+	    String upVote = request.getParameter("newUpVote");
+	    String downVote = request.getParameter("newDownVote");
+	
+	    
+	    System.out.println(id);
+	    System.out.println(upVote);
+	    System.out.println(downVote);
+	    
 		request.getRequestDispatcher("FetchData").forward(request, response);
 		
 	}

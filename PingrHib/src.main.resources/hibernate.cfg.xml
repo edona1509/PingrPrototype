@@ -8,7 +8,7 @@
 		<property name="hibernate.connection.driver_class">org.postgresql.Driver</property>
 		<property name="hibernate.connection.url">jdbc:postgresql://localhost:5432/postgres</property>
 		<property name="hibernate.connection.username">postgres</property>
-		<property name="hibernate.connection.password">loistvtb</property>
+		<property name="hibernate.connection.password">cofc1994?</property>
 		<!-- Connection Pool Size -->
 		<property name="hibernate.connection.pool_size">1</property>
 
