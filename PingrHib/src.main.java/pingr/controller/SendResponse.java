@@ -1,12 +1,14 @@
 package pingr.controller;
 
 import java.io.IOException;
+import java.util.List;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import pingr.model.PingrBean;
 import pingr.model.PingrManager;
 
 public class SendResponse extends HttpServlet  {
@@ -48,24 +50,37 @@ public class SendResponse extends HttpServlet  {
 		
 		String id = request.getParameter("idGiusto");
 		int idPing = Integer.parseInt(id);
-		
+		System.out.println("L'id è : "+id);
 	
 		pingr.model.PingrBean savePingr = PingrManager.getPingrDetails(idPing);
 	
+		List<PingrBean> pingrList = PingrManager.getAllInfo();
+		
 	    String upVote = request.getParameter("up");
-	    String downVote = request.getParameter("down");
-	    int votoSu = Integer.parseInt(upVote);
-	    int votoGiu = Integer.parseInt(downVote);
-	    
-	    System.out.println("L'id è : "+id);
 	    System.out.println("Voto su è ora: "+ upVote);
+	    String downVote = request.getParameter("down");
 	    System.out.println("Voto giù è ora: "+downVote);
 	    
+	    int votoSu = Integer.parseInt(upVote);
+	    int votoGiu = Integer.parseInt(downVote);
+	  	
+	    for(int i=0;i<pingrList.size();i++){
+	   
+	    	int idDellaLista = pingrList.get(i).getPingrID();
+	    	
+	    	if (idDellaLista == idPing) {
+	    		
+	    		pingrList.get(i).setUp_vote(votoGiu);
+	    		pingrList.get(i).setUp_vote(votoSu);
+	    		
+	    	}
+	    	
+	    }
 	    
-	    savePingr.setUp_vote(votoSu);
-	    savePingr.setUp_vote(votoGiu);
-	    
-		request.getRequestDispatcher("index3.jsp").forward(request, response);
+	   	response.setContentType("text/html");
+		request.setAttribute("pingrList", pingrList);
+		request.getRequestDispatcher("index4.jsp").forward(request, response);
+		
 		
 	}
 	

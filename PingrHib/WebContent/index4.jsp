@@ -157,7 +157,7 @@
 				  	</form>
 			  	 
 	<script>
-	window.alert("Thank you for posting a Ping!");
+	window.alert("Thank you for voting a Ping!");
 	</script>
 
 <nav class="navbar navbar-inverse navbar-fixed-top">
@@ -167,7 +167,7 @@
     
       
       <div id="floatRightBitch">
-    <li><a href="post.jsp"><span class="glyphicon glyphicon-pencil bigger extraP"></span></a></li>
+    <a href="post.jsp"><span class="glyphicon glyphicon-pencil bigger extraP"></span></a>
       </div>
 </div>
   </div>

@@ -33,7 +33,7 @@
         	          var marker = new google.maps.Marker({
         	              position: pos,
         	              map: map,
-        	              title: 'Hello World!'
+        	              title: 'Hello, you are here!'
         	          });
 
         	          map.setCenter(pos);
