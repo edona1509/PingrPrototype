@@ -4,7 +4,6 @@ package pingr.controller;
 import pingr.model.PingrManager;
 
 import java.io.IOException;
-import java.io.PrintWriter;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -71,10 +70,10 @@ public class PingrBeanController extends HttpServlet {
 		PingrManager.saveCommentDetails(comment1);
 		PingrManager.saveCommentDetails(comment);
 		
-		int id = pingr.getPingrID();
-		String idPingr = Integer.toString(id);
-		
-		request.setAttribute("idPingr", idPingr);
+//		int id = pingr.getPingrID();
+//		String idPingr = Integer.toString(id);
+//		
+//		request.setAttribute("idPingr", idPingr);
 		
 		// Giving the response to the user redirecting them on the FetchData Servlet!
 		RequestDispatcher rd = request.getRequestDispatcher("FetchData");

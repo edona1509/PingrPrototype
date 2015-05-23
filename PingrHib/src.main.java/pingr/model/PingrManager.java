@@ -54,6 +54,8 @@ public class PingrManager {
 		
 		return entry;
 	}
+	
+	
 
 	public static List<PingrBean> getAllInfo(){
 		

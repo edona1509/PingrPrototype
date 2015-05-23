@@ -16,7 +16,9 @@ public class SendResponse extends HttpServlet  {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-	// fuck!
+	
+		
+		System.out.println("Sono nel sendResponse!!!!!!!!!!!!!!!!!!!!!");
 //		String id = (String)request.getAttribute("idPingr");
 //		int pingID = Integer.parseInt(id);
 //		pingr.model.PingrBean pingr = PingrManager.getPingrDetails(pingID);
@@ -44,17 +46,26 @@ public class SendResponse extends HttpServlet  {
 		//request.getRequestDispatcher("index3.jsp").forward(request, response);
 		
 		
-		pingr.model.PingrBean pingr = new pingr.model.PingrBean();
 		String id = request.getParameter("idGiusto");
-	    String upVote = request.getParameter("newUpVote");
-	    String downVote = request.getParameter("newDownVote");
+		int idPing = Integer.parseInt(id);
+		
 	
+		pingr.model.PingrBean savePingr = PingrManager.getPingrDetails(idPing);
+	
+	    String upVote = request.getParameter("up");
+	    String downVote = request.getParameter("down");
+	    int votoSu = Integer.parseInt(upVote);
+	    int votoGiu = Integer.parseInt(downVote);
 	    
-	    System.out.println(id);
-	    System.out.println(upVote);
-	    System.out.println(downVote);
+	    System.out.println("L'id è : "+id);
+	    System.out.println("Voto su è ora: "+ upVote);
+	    System.out.println("Voto giù è ora: "+downVote);
 	    
-		request.getRequestDispatcher("FetchData").forward(request, response);
+	    
+	    savePingr.setUp_vote(votoSu);
+	    savePingr.setUp_vote(votoGiu);
+	    
+		request.getRequestDispatcher("index3.jsp").forward(request, response);
 		
 	}
 	

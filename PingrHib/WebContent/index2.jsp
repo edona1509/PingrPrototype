@@ -76,8 +76,8 @@
 	                infowindow.setContent('<p>Ping: '+ showContent +'</p>'+ 
 	                		'<p id="upID" > Up: '+ up +'</p>'+
 	                		'<p id="downID" > Down: '+ down +'</p>'+
-	        				'<button onclick="voteUp('+ up + ','+ idGiusto+')"> Up vote </button>'+
-	          				'<button onclick="voteDown('+ down + ','+idGiusto+')"> Down vote </button>');
+	        				'<input type="submit" value="Up vote" onclick="voteUp('+ up + ','+ idGiusto+')" form="myFormUp" ></input>'+
+	          				'<input type="submit" value="Down vote" id="voteDownButton" onclick="voteDown('+ down + ','+idGiusto+')"  form="myFormDown"></input>');
 	                infowindow.open(map, marker);
 	            }
 	  		})(marker, showContent, up, down, idGiusto));
@@ -86,7 +86,7 @@
 	  	  
 	 }
 	 
-	  	function voteUp(up, idGiusto) {
+  	function voteUp(up, idGiusto) {
 			
 	  		up++;
 	  		document.getElementById('upID').innerHTML = 'Up: '+ up 
@@ -99,10 +99,7 @@
 		  document.getElementById('up').value = newUpVote
 		
 	  		
-	  	  document.write("<form method=\"get\" action=\"/PingrHib/SendResponse\"> "+ 
-				  "  <input type=\"hidden\" id=\"idGiusto\" name=\"idGiusto\" /> " +
-				   " <input type=\"hidden\" id=\"newUpVote\" name=\"newUpVote\" /> " +
-				  " </form>");
+	  	 // document.write("");
 	  		
 	  		}
 	  	 
@@ -113,14 +110,11 @@
 			  // alert('Down vote!' + down );
 			  
 			
-			  document.getElementById('idGiusto').value = myID
+			   document.getElementById('idGiusto').value = myID
 		 	   document.getElementById('down').value = newDownVote
-			  document.write("<form method=\"get\" action=\"/PingrHib/SendResponse\"> "+ 
-			  "  <input type=\"hidden\" id=\"idGiusto\" name=\"idGiusto\" /> " +
-			   " <input type=\"hidden\" id=\"newDownVote\" name=\"newDownVote\" /> " +
-			  " </form>");
+		 	   
+			  document.write();
 		  }
-		  
 	
 	  function initialize() {
   	  var mapOptions = {
@@ -145,8 +139,17 @@
     
 </head>
 <body>
-
- <script>
+					<form method="get" action="/PingrHib/SendResponse" id="myFormUp"> 
+					<input type="hidden" id="idGiusto" name="idGiusto" /> 
+				    <input type="hidden" id="up" name="up" />
+				 	</form>
+				 	
+				 <form method="get" action="/PingrHib/SendResponse" id="myFormDown"> 
+			   	 <input type="hidden" id="idGiusto" name="idGiusto" /> 
+			   	 <input type="hidden" id="down" name="down" />
+			  	 </form>
+			  	 
+	<script>
 	window.alert("Thank you for posting a Ping!");
 	</script>
 
