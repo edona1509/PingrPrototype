@@ -1,11 +1,10 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ page import="java.util.List"%>
-<%@ page import="pingr.controller.FetchData"%>
 <!DOCTYPE html>
 <% List pingrList = (List)session.getAttribute("pingrList");%>
 <html lang="en">
 <head>
-	
+
   <title>Pingr</title>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -14,18 +13,68 @@
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
   <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
   <script src="https://maps.googleapis.com/maps/api/js"> </script>
-    
-    
+   
+</head>
+<body>
+
  <script type="text/javascript">
   var pings = [];
   var map;
-
+  function voteAlert() {window.alert("Thank you for voting a Ping!");}
  </script>
   
-<script>
-	function voteAlert() {window.alert("Thank you for voting a Ping!");}
-	</script>
+     
+  <script> 
 	
+  function initialize() {
+    	 
+	  	  directionsDisplay = new google.maps.DirectionsRenderer();
+    	   var mapOptions = {
+    	    zoom:10,
+    	   };
+    	 
+    	  map = new google.maps.Map(document.getElementById('map-canvas'), mapOptions);
+    	  directionsDisplay.setMap(map);
+	    
+    	      // Try HTML5 geolocation
+    	      if(navigator.geolocation) {
+    	        navigator.geolocation.getCurrentPosition(function(position) {
+    	          var pos = new google.maps.LatLng(position.coords.latitude,
+    	                                           position.coords.longitude);
+    		   
+    	          map.setCenter(pos);
+    	        }, function() {
+    	          handleNoGeolocation(true);
+    	        });
+    	      } else {
+    	        // Browser doesn't support Geolocation
+    	        handleNoGeolocation(false);
+    	      }
+    	
+    	      setMarkers(map, pings);
+    	   
+    	    }
+  
+  google.maps.event.addDomListener(window, 'load', initialize);
+      
+		 function detectBrowser() {
+		 var useragent = navigator.userAgent;
+		 var mapdiv = document.getElementById("map-canvas");
+		
+		 if (useragent.indexOf('iPhone') != -1 || useragent.indexOf('Android') != -1 ) {
+		   mapdiv.style.width = '100%';
+		   mapdiv.style.height = '100%';
+		 } else {
+		   mapdiv.style.width = '600px';
+		   mapdiv.style.height = '800px';
+		 }
+		}
+	      detectBrowser();
+ 	
+  </script> 
+	
+
+
   <c:forEach items="${pingrList}" var="element">  
   <script type="text/javascript">
   	  
@@ -78,7 +127,7 @@
   	                		'<p id="upID" > Up: '+ up +'</p>'+
   	                		'<p id="downID" > Down: '+ down +'</p>'+
   	        				'<input type="submit" value="Up vote" onclick="voteUp('+ up + ','+ idGiusto +','+ down+'),voteAlert()"   form="myFormUp" ></input>'+
-  	          				'<input type="submit" value="Down vote" id="voteDownButton" onclick="voteDown('+ down + ','+idGiusto+ ','+ up+'),voteAlert()" form="myFormDown"></input>'+
+  	          				'<input type="submit" value="Down vote" onclick="voteDown('+ down + ','+idGiusto+ ','+ up +'),voteAlert()" form="myFormDown"></input>'+
   	          				'<p> </p>' +
   	          				'<p> Add a comment to this Ping!</p>' +
   	          				'<textarea class="form-control" id="commentArea" name="commentArea" rows="2"> </textarea>'+
@@ -98,8 +147,8 @@
   	  		down;
   	  		document.getElementById('upID').innerHTML = 'Up: '+ up 
   	  			  		
-  			//alert('Up vote!' + idGiusto);
-  	  		
+  	  	 
+  			
   			document.getElementById('idGiusto').value = idGiusto
   			document.getElementById('up').value = up
   			document.getElementById('down').value = down
@@ -114,7 +163,7 @@
   			  up;
   			  document.getElementById('downID').innerHTML = 'Down: '+ down 
   			  
-  			  // alert('Down vote!' + down );
+  			  
   					
   			  document.getElementById('idGiusto').value = idGiusto
   		 	  document.getElementById('down').value = down
@@ -126,59 +175,7 @@
             
     </script>
      </c:forEach>
- 	
-      
-  <script> 
 	
-  function initialize() {
-    	 
-	  	  directionsDisplay = new google.maps.DirectionsRenderer();
-    	   var mapOptions = {
-    	    zoom:10,
-    	   };
-    	 
-    	  map = new google.maps.Map(document.getElementById('map-canvas'), mapOptions);
-    	  directionsDisplay.setMap(map);
-	    
-    	      // Try HTML5 geolocation
-    	      if(navigator.geolocation) {
-    	        navigator.geolocation.getCurrentPosition(function(position) {
-    	          var pos = new google.maps.LatLng(position.coords.latitude,
-    	                                           position.coords.longitude);
-    		   
-    	          map.setCenter(pos);
-    	        }, function() {
-    	          handleNoGeolocation(true);
-    	        });
-    	      } else {
-    	        // Browser doesn't support Geolocation
-    	        handleNoGeolocation(false);
-    	      }
-    	
-    	      setMarkers(map, pings);
-    	   
-    	    }
-  
-  google.maps.event.addDomListener(window, 'load', initialize);
-      
-		 function detectBrowser() {
-		 var useragent = navigator.userAgent;
-		 var mapdiv = document.getElementById("map-canvas");
-		
-		 if (useragent.indexOf('iPhone') != -1 || useragent.indexOf('Android') != -1 ) {
-		   mapdiv.style.width = '100%';
-		   mapdiv.style.height = '100%';
-		 } else {
-		   mapdiv.style.width = '600px';
-		   mapdiv.style.height = '800px';
-		 }
-		}
-	      detectBrowser();
- 	
-  </script>   
-    
-</head>
-<body>
 					<form method="get" action="/PingrHib/SendResponse" id="myFormUp"> 
 					<input type="hidden" id="idGiusto" name="idGiusto" /> 
 				    <input type="hidden" id="up" name="up" />
@@ -187,14 +184,16 @@
 				 	
 				    <form method="get" action="/PingrHib/SendResponse" id="myFormDown"> 
 				    <input type="hidden" id="idGiusto" name="idGiusto" /> 
-				    <input type="hidden" id="up" name="up" />
 				    <input type="hidden" id="down" name="down" />
-				  	</form>
+				    <input type="hidden" id="up" name="up" />
+				    </form>
 
 <div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
     <div class="container">
         <div class="navbar-header pull-left">
+     
             <a class="navbar-brand" href="index.jsp">Pingr</a>
+            
         </div>
 
 		<div class="navbar-header pull-right littleP">

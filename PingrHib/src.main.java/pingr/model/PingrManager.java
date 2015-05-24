@@ -27,17 +27,22 @@ public class PingrManager {
 				
 	}
 	
-	public static void saveCommentDetails(CommentBean comment){
-		
+	public static void savePingrElements(int id, int up_vote, int down_vote){
 		// Get Session
 				SessionFactory sessionFactory = HibernateUtil.getSessionAnnotationFactory();
 				Session session = sessionFactory.getCurrentSession();
 				// start transaction
 				session.beginTransaction();
-				// Save the Model object
-				session.save(comment);
+				
+				PingrBean pingr = (PingrBean)session.get(PingrBean.class,id);
+				pingr.setUp_vote(up_vote);
+				pingr.setDown_vote(down_vote);
+				session.update(pingr);
+				
+				
 				// Commit transaction
 				session.getTransaction().commit();
+		
 	}
 	
 	public static PingrBean getPingrDetails(int id) {
@@ -56,6 +61,18 @@ public class PingrManager {
 	}
 	
 	
+	public static void saveCommentDetails(CommentBean comment){
+		
+		// Get Session
+				SessionFactory sessionFactory = HibernateUtil.getSessionAnnotationFactory();
+				Session session = sessionFactory.getCurrentSession();
+				// start transaction
+				session.beginTransaction();
+				// Save the Model object
+				session.save(comment);
+				// Commit transaction
+				session.getTransaction().commit();
+	}
 
 	public static List<PingrBean> getAllInfo(){
 		
@@ -79,7 +96,8 @@ public class PingrManager {
 				   
 					//System.out.println(results.get(i));
 					PingrBean pingr = (PingrBean) results.get(i);
-					System.out.println(pingr);
+					
+					
 				}
 				
 				// Commit transaction

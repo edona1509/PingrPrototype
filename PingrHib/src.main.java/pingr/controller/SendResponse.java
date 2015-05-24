@@ -54,14 +54,14 @@ public class SendResponse extends HttpServlet  {
 		int idPing = Integer.parseInt(id);
 		System.out.println("L'id è : "+id);
 	
-		pingr.model.PingrBean savePingr = PingrManager.getPingrDetails(idPing);
-	
+		
 		List<PingrBean> pingrList = PingrManager.getAllInfo();
 		
+	
 	    String upVote = request.getParameter("up");
 	    System.out.println("Voto su è ora: "+ upVote);
 	    String downVote = request.getParameter("down");
-	    System.out.println("Voto giù è ora: "+downVote);
+	    System.out.println("Voto giù è ora: "+ downVote);
 	    
 	    int votoSu = Integer.parseInt(upVote);
 	    int votoGiu = Integer.parseInt(downVote);
@@ -72,9 +72,13 @@ public class SendResponse extends HttpServlet  {
 	    	
 	    	if (idDellaLista == idPing) {
 	    		
-	    		pingrList.get(i).setUp_vote(votoGiu);
 	    		pingrList.get(i).setUp_vote(votoSu);
+	    		pingrList.get(i).setDown_vote(votoGiu);
 	    		
+	    		
+	    		PingrManager.savePingrElements(idPing, votoSu, votoGiu);
+	    		
+	    	
 	    	}
 	    	
 	    }

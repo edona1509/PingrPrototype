@@ -11,7 +11,9 @@ import javax.persistence.Table;
 
 
 @Entity 
+
 @Table(name="PINGR_BEAN")
+
 public class PingrBean {
 	
 	@Id

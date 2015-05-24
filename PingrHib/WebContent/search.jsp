@@ -13,19 +13,29 @@
      <script src="https://maps.googleapis.com/maps/api/js?v=3.exp&signed_in=true&libraries=places"></script>
   	  <script type="text/javascript">
   	  
-  	  
+  	 var map;
   	function initialize() {
 
   	  var markers = [];
-  	  var map = new google.maps.Map(document.getElementById('map-canvas'), {
+  	  map = new google.maps.Map(document.getElementById('map-canvas'), {
   	    mapTypeId: google.maps.MapTypeId.ROADMAP
   	  });
 
-  	  var defaultBounds = new google.maps.LatLngBounds(
-  	      new google.maps.LatLng(-33.8902, 151.1759),
-  	      new google.maps.LatLng(-33.8474, 151.2631));
-  	  map.fitBounds(defaultBounds);
+  	if(navigator.geolocation) {
+	    navigator.geolocation.getCurrentPosition(function(position) { 
+  	  var defaultBounds = new google.maps.LatLngBounds(new google.maps.LatLng(position.coords.latitude,
+	          position.coords.longitude), new google.maps.LatLng(position.coords.latitude+ 0.5,
+			          position.coords.longitude+ 0.5));
+	  map.fitBounds(defaultBounds); 
 
+	    }, function() {
+	      handleNoGeolocation(true);
+	    });
+	  } else {
+	    // Browser doesn't support Geolocation
+	    handleNoGeolocation(false);
+	  }
+	  
   	  // Create the search box and link it to the UI element.
   	  var input = /** @type {HTMLInputElement} */(
   	      document.getElementById('pac-input'));
@@ -59,14 +69,7 @@
   	        scaledSize: new google.maps.Size(25, 25)
   	      };
 
-  	      // Create a marker for each place.
-  	      var marker = new google.maps.Marker({
-  	        map: map,
-  	        icon: image,
-  	        title: place.name,
-  	        position: place.geometry.location
-  	      });
-
+  	
   	      markers.push(marker);
 
   	      bounds.extend(place.geometry.location);
