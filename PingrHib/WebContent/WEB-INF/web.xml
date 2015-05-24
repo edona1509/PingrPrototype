@@ -18,6 +18,14 @@
     <url-pattern>/PingrBeanController</url-pattern>
   </servlet-mapping>
   <servlet>
+   <servlet-name>FetchData</servlet-name>
+    <servlet-class>pingr.controller.FetchData</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>FetchData</servlet-name>
+    <url-pattern>/FetchData</url-pattern>
+  </servlet-mapping>
+  <servlet>
     <servlet-name>SendResponse</servlet-name>
     <servlet-class>pingr.controller.SendResponse</servlet-class>
   </servlet>

@@ -14,7 +14,7 @@ import pingr.model.PingrManager;
 /**
  * Servlet implementation class FetchData
  */
-@WebServlet("/FetchData")
+
 public class FetchData extends HttpServlet {
 	private static final long serialVersionUID = 1L;
  
@@ -22,6 +22,7 @@ public class FetchData extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		
 		
 		List<PingrBean> pingrList = PingrManager.getAllInfo();
 		
@@ -45,9 +46,12 @@ public class FetchData extends HttpServlet {
 			
 		}
 		
+	
 		response.setContentType("text/html");
+		
 		request.setAttribute("pingrList", pingrList);
-		request.getRequestDispatcher("index2.jsp").forward(request, response);
+	
+		request.getRequestDispatcher("index.jsp").forward(request, response);
 		
 	}
 
