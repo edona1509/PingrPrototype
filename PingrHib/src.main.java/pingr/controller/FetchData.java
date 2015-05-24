@@ -35,13 +35,13 @@ public class FetchData extends HttpServlet {
 			double lat = pingrList.get(i).getLatitude();
 			double lon = pingrList.get(i).getLongitude();
 			
-			System.out.println(id);
-			System.out.println(cont);
-			System.out.println(cat);
-			System.out.println(up);
-			System.out.println(down);
-			System.out.println(lat);
-			System.out.println(lon);
+//			System.out.println(id);
+//			System.out.println(cont);
+//			System.out.println(cat);
+//			System.out.println(up);
+//			System.out.println(down);
+//			System.out.println(lat);
+//			System.out.println(lon);
 			
 		}
 		
