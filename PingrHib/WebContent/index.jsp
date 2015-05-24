@@ -126,8 +126,8 @@
   	                infowindow.setContent('<p>Ping: '+ showContent +'</p>'+ 
   	                		'<p id="upID" > Up: '+ up +'</p>'+
   	                		'<p id="downID" > Down: '+ down +'</p>'+
-  	        				'<input type="submit" value="Up vote" onclick="voteUp('+ up + ','+ idGiusto +','+ down+'),voteAlert()"   form="myFormUp" ></input>'+
-  	          				'<input type="submit" value="Down vote" onclick="voteDown('+ down + ','+idGiusto+ ','+ up +'),voteAlert()" form="myFormDown"></input>'+
+  	        				'<input type="submit" value="Up vote" onclick="voteUp('+ up + ','+ idGiusto +','+ down+'),voteAlert()"   form="myForm" ></input>'+
+  	          				'<input type="submit" value="Down vote" onclick="voteDown('+ down + ','+idGiusto+ ','+ up +'),voteAlert()" form="myForm"></input>'+
   	          				'<p> </p>' +
   	          				'<p> Add a comment to this Ping!</p>' +
   	          				'<textarea class="form-control" id="commentArea" name="commentArea" rows="2"> </textarea>'+
@@ -140,6 +140,22 @@
   	  	  
   	 }
   	 
+   	 function voteDown(down, idGiusto, up){
+			  
+			  down++;
+			  idGiusto;
+			  up;
+			  document.getElementById('downID').innerHTML = 'Down: '+ down 
+			  
+							
+			  document.getElementById('idGiusto').value = idGiusto
+		 	  document.getElementById('down').value = down
+		 	  document.getElementById('up').value = up
+		 	 
+		 	   
+		  }
+
+   	 
     	function voteUp(up, idGiusto, down) {
   			
   	  		up++;
@@ -156,38 +172,17 @@
   			
   	  	}
   	  	 
-  	 function voteDown(down, idGiusto, up){
-  			  
-  			  down++;
-  			  idGiusto;
-  			  up;
-  			  document.getElementById('downID').innerHTML = 'Down: '+ down 
-  			  
-  			  
-  					
-  			  document.getElementById('idGiusto').value = idGiusto
-  		 	  document.getElementById('down').value = down
-  		 	  document.getElementById('up').value = up
-  		 	 
-  		 	   
-  		  }
 
             
     </script>
      </c:forEach>
-	
-					<form method="get" action="/PingrHib/SendResponse" id="myFormUp"> 
-					<input type="hidden" id="idGiusto" name="idGiusto" /> 
-				    <input type="hidden" id="up" name="up" />
-				    <input type="hidden" id="down" name="down" />
-				 	</form>
-				 	
-				    <form method="get" action="/PingrHib/SendResponse" id="myFormDown"> 
+      	
+				    <form method="get" action="/PingrHib/SendResponse" id="myForm"> 
 				    <input type="hidden" id="idGiusto" name="idGiusto" /> 
 				    <input type="hidden" id="down" name="down" />
 				    <input type="hidden" id="up" name="up" />
-				    </form>
-
+				 	</form>
+				
 <div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
     <div class="container">
         <div class="navbar-header pull-left">

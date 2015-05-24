@@ -74,8 +74,7 @@ public class SendResponse extends HttpServlet  {
 	    		
 	    		pingrList.get(i).setUp_vote(votoSu);
 	    		pingrList.get(i).setDown_vote(votoGiu);
-	    		
-	    		
+	    			    		
 	    		PingrManager.savePingrElements(idPing, votoSu, votoGiu);
 	    		
 	    	
