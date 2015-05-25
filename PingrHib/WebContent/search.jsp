@@ -62,11 +62,12 @@
   	    var bounds = new google.maps.LatLngBounds();
   	    for (var i = 0, place; place = places[i]; i++) {
   	      var image = {
+  	        zoom: 12,
   	        url: place.icon,
-  	        size: new google.maps.Size(71, 71),
+  	        size: new google.maps.Size(100, 100),
   	        origin: new google.maps.Point(0, 0),
   	        anchor: new google.maps.Point(17, 34),
-  	        scaledSize: new google.maps.Size(25, 25)
+  	        scaledSize: new google.maps.Size(55, 55)
   	      };
 
   	
@@ -84,8 +85,23 @@
   	  google.maps.event.addListener(map, 'bounds_changed', function() {
   	    var bounds = map.getBounds();
   	    searchBox.setBounds(bounds);
+  	    map.setZoom(7);
   	  });
   	}
+  	
+  	//Show Hide Funtion for the Search Button
+  	
+  		function showHide() {
+  			
+	  		console.log("I am in the show hide");
+	  			$("#searchButton").click(function(e){
+	  				e.preventDefault();
+	  				$("#pac-input").toggle();
+	  			});
+  		}
+
+
+  	
 
   	google.maps.event.addDomListener(window, 'load', initialize);
           
@@ -120,15 +136,15 @@
     </div>
 </div>
        
-  <input id="pac-input" class="controls" type="text" placeholder="Search Box"> 
+  <input id="pac-input" class="controls" type="text" placeholder="Search" style="display:none"> 
 
  <div id="map-canvas" style="height: 100%, width: 100%;"></div>
 
 
 <div class="navbar navbar-inverse navbar-fixed-bottom" role="navigation">
     <div class="container">
-        <div class="navbar-header pull-left">
-            <a href="search.jsp" class="navbar-brand"><span class="glyphicon glyphicon-search bigger extraP"></span></a>
+        <div id="searchButton" class="navbar-header pull-left" onclick="showHide()">
+            <a href="#" class="navbar-brand"><span class="glyphicon glyphicon-search bigger extraP"></span></a>
         </div>
 
 		<div class="navbar-header pull-right littleP">
