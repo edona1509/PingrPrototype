@@ -144,7 +144,7 @@
   	 function sendComment(){
   		
   		var comment = document.getElementById("commentArea").value;
-  		alert(comment);
+  		//alert(comment);
   		 
   		 
   	 }
