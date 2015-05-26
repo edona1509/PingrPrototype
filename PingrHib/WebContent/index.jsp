@@ -83,7 +83,7 @@
      	 * the order in which these markers should display on top of each
      	 * other.
      	 */
-
+     		
      		 var id = '${element.pingrID}'
        		 var upvote = '${element.up_vote}';
       		 var downvote = '${element.down_vote}'; 
@@ -91,6 +91,7 @@
   			 var lat = '${element.latitude}';
   			 var lon = '${element.longitude}';
   			 var content = '${element.content}';
+  			
 
   	 
   	  pings.push([content, lat, lon, cat, downvote, upvote, id]);
@@ -111,8 +112,9 @@
   	  	    var down = locations[i][4];
   	  	    var idGiusto = locations[i][6];
   	  	    var myLatLng = new google.maps.LatLng(ping[1], ping[2]);
-  	 
+  	 		
   	  	    
+  	  	
   	  	    var marker = new google.maps.Marker({
   	  	        position: myLatLng,
   	  	        map: map,
@@ -120,8 +122,8 @@
   	  	    });
   	  	    
   	  	  
-  	  	    
-  	  	 google.maps.event.addListener(marker, 'click',  (function(marker, showContent, up, down, idGiusto) {
+  	  	    var comment;
+  	  	  	 google.maps.event.addListener(marker, 'click',  (function(marker, showContent, up, down, idGiusto) {
   	  		  return function() {
   	                infowindow.setContent('<p>Ping: '+ showContent +'</p>'+ 
   	                		'<p id="upID" > Up: '+ up +'</p>'+
@@ -130,8 +132,8 @@
   	          				'<input type="submit" value="Down vote" onclick="voteDown('+ down + ','+idGiusto+ ','+ up +'),voteAlert()" form="myForm"></input>'+
   	          				'<p> </p>' +
   	          				'<p> Add a comment to this Ping!</p>' +
-  	          				'<textarea class="form-control" id="commentArea" rows="2"> </textarea>'+
-  	          				'<input type="submit" value="Send comment" onclick="sendComment()" form="myCommentForm" ></input>');
+  	          				'<textarea class="form-control" name="comment" id="commentArea" rows="2"></textarea>'+
+  	          				'<input type="submit" value="Send comment" onclick="sendComment('+ idGiusto +')" form="myCommentForm"></input>');
   	                infowindow.open(map, marker);
   	            }
   	  		})(marker, showContent, up, down, idGiusto));
@@ -140,14 +142,19 @@
   	  	  
   	 }
   	  
-  	 
-  	 function sendComment(){
+   
+  	 function sendComment(idGiusto){
+  	
+  	 	
+  		comment = document.getElementById('commentArea').value;
+  		document.getElementById('idGiusto').value = idGiusto
   		
-  		var comment = document.getElementById("commentArea").value;
-  		//alert(comment);
-  		 
+  		
+  		alert(comment);
+  		
   		 
   	 }
+  	 
   	 
    	 function voteDown(down, idGiusto, up){
 			  
@@ -182,17 +189,20 @@
      </c:forEach>
      
      
-     
-					<form method="get" action="/PingrHib/PingrBeanController" id="myCommentForm" >
-					<input type="hidden"  />
-					</form>
-      	
-				    <form method="get" action="/PingrHib/SendResponse" id="myForm"> 
+      				<form method="get" action="/PingrHib/SendResponse" id="myForm"> 
 				    <input type="hidden" id="idGiusto" name="idGiusto" /> 
 				    <input type="hidden" id="down" name="down" />
 				    <input type="hidden" id="up" name="up" />
 				 	</form>
 				
+      	
+     
+					<form method="get" action="/PingrHib/PingrBeanController" id="myCommentForm">
+					<input type="hidden" id="comment" name="comment" value="${comment}" />
+					<input type="hidden" id="idGiusto" name="idGiusto" /> 
+					</form>
+					
+				  
 				
 				
 <div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
