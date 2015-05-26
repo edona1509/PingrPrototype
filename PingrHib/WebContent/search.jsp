@@ -8,10 +8,16 @@
   <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css"> 
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
   <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
-    
-     <script src="https://maps.googleapis.com/maps/api/js"> </script>
-     <script src="https://maps.googleapis.com/maps/api/js?v=3.exp&signed_in=true&libraries=places"></script>
-  	  <script type="text/javascript">
+  <script src="//code.jquery.com/jquery-1.11.3.min.js"></script>  
+  <script src="https://maps.googleapis.com/maps/api/js"> </script>
+  <script src="https://maps.googleapis.com/maps/api/js?v=3.exp&signed_in=true&libraries=places"></script>
+  
+  
+  
+
+  
+  
+  <script type="text/javascript">
   	  
   	 var map;
   	function initialize() {

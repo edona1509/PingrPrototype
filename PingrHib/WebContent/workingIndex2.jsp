@@ -7,14 +7,13 @@
 
   <title>Pingr</title>
   <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="booty.css">
     <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css"> 
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
   <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
-  
-  <script src="//code.jquery.com/jquery-1.11.3.min.js"></script> 
-  <script type="text/javascript" src="http://maps.google.com/maps/api/js?libraries=places&sensor=false"></script>
+
+   <script src="https://maps.googleapis.com/maps/api/js?v=3.exp&signed_in=true&libraries=places"></script>
    
 </head>
 <body>
@@ -27,13 +26,15 @@
   
      
   <script> 
-
+	
   function initialize() {
-    	 
+	  	console.log("I am in initialize");
 	  	  directionsDisplay = new google.maps.DirectionsRenderer();
     	   var mapOptions = {
     	    zoom:10,
     	   };
+    	   
+    	   
     	 
     	  map = new google.maps.Map(document.getElementById('map-canvas'), mapOptions);
     	  directionsDisplay.setMap(map);
@@ -54,102 +55,13 @@
     	      }
     	
     	      setMarkers(map, pings);
-    	   
-    	   
-/* 
-    	  	var map;
-    	
-
-    	  	  var markers = [];
-    	  	  map = new google.maps.Map(document.getElementById('map-canvas'), {
-    	  	    mapTypeId: google.maps.MapTypeId.ROADMAP
-    	  	  });
-
-    	  	if(navigator.geolocation) {
-    		    navigator.geolocation.getCurrentPosition(function(position) { 
-    	  	  var defaultBounds = new google.maps.LatLngBounds(new google.maps.LatLng(position.coords.latitude,
-    		          position.coords.longitude), new google.maps.LatLng(position.coords.latitude+ 0.5,
-    				          position.coords.longitude+ 0.5));
-    		  map.fitBounds(defaultBounds); 
-
-    		    }, function() {
-    		      handleNoGeolocation(true);
-    		    });
-    		  } else {
-    		    // Browser doesn't support Geolocation
-    		    handleNoGeolocation(false);
-    		  }
-    		  
-    	  	  // Create the search box and link it to the UI element.
-    	  	  var input = /** @type {HTMLInputElement} */
-    	  	 /*  (
-    	  	      document.getElementById('pac-input'));
-    	  	  map.controls[google.maps.ControlPosition.TOP_LEFT].push(input);
-
-    	  	  var searchBox = new google.maps.places.SearchBox( */
-    	  	    /** @type {HTMLInputElement} */        /*  (input)); */
-
-    	  	  // [START region_getplaces]
-    	  	  // Listen for the event fired when the user selects an item from the
-    	  	  // pick list. Retrieve the matching places for that item.
-    	  	/*   google.maps.event.addListener(searchBox, 'places_changed', function() {
-    	  	    var places = searchBox.getPlaces();
-
-    	  	    if (places.length == 0) {
-    	  	      return;
-    	  	    }
-    	  	    for (var i = 0, marker; marker = markers[i]; i++) {
-    	  	      marker.setMap(null);
-    	  	    } */
-
-    	  	    // For each place, get the icon, place name, and location.
-    	  	   // markers = [];
-    	  	  /*   var bounds = new google.maps.LatLngBounds();
-    	  	    for (var i = 0, place; place = places[i]; i++) {
-    	  	      var image = {
-    	  	        zoom: 12,
-    	  	        url: place.icon,
-    	  	        size: new google.maps.Size(100, 100),
-    	  	        origin: new google.maps.Point(0, 0),
-    	  	        anchor: new google.maps.Point(17, 34),
-    	  	        scaledSize: new google.maps.Size(55, 55)
-    	  	      };
-
-    	  	
-    	  	      markers.push(marker);
-
-    	  	      bounds.extend(place.geometry.location);
-    	  	    }
-
-    	  	    map.fitBounds(bounds);
-    	  	  }); */
-    	  	  // [END region_getplaces]
-
-    	  	  // Bias the SearchBox results towards places that are within the bounds of the
-    	  	  // current map's viewport.
-/*     	  	  google.maps.event.addListener(map, 'bounds_changed', function() {
-    	  	    var bounds = map.getBounds();
-    	  	    searchBox.setBounds(bounds);
-    	  	    map.setZoom(7);
-    	  	  });
-    	  	} */
-    	  	
-    	  	//Show Hide Funtion for the Search Button
-    	  	/* 	function showHide() {
-    	  			
-    		  		console.log("I am in the show hide");
-    		  			$("#searchButton").click(function(e){
-    		  				e.preventDefault();
-    		  				$("#pac-input").toggle();
-    		  			});
-    	  		}
- */
-
-    	  	
-
-    	 google.maps.event.addDomListener(window, 'load', initialize);
+    	      map.controls[google.maps.ControlPosition.TOP_LEFT].push(input);
+    	    }
+  
+  google.maps.event.addDomListener(window, 'load', initialize);
       
 		 function detectBrowser() {
+			 console.log("I am in detectBrowser");
 		 var useragent = navigator.userAgent;
 		 var mapdiv = document.getElementById("map-canvas");
 		
@@ -162,11 +74,93 @@
 		 }
 		}
 	      detectBrowser();
+	      
+	      
+	      function searchBitch(){
+	    	  console.log("I am in searchBitch");
+	    	  var markers = [];
+
+
+/* 	    	  var defaultBounds = new google.maps.LatLngBounds(
+	    	      new google.maps.LatLng(-33.8902, 151.1759),
+	    	      new google.maps.LatLng(-33.8474, 151.2631));
+	    	  map.fitBounds(defaultBounds); */
+
+	    	  // Create the search box and link it to the UI element.
+	    	  var input = /** @type {HTMLInputElement} */(
+	    	      document.getElementById('pac-input'));
+	    	  map.controls[google.maps.ControlPosition.TOP_LEFT].push(input);
+
+	    	  var searchBox = new google.maps.places.SearchBox(
+	    	    /** @type {HTMLInputElement} */(input));
+
+	    	  // [START region_getplaces]
+	    	  // Listen for the event fired when the user selects an item from the
+	    	  // pick list. Retrieve the matching places for that item.
+	    	  google.maps.event.addListener(searchBox, 'places_changed', function() {
+	    	    var places = searchBox.getPlaces();
+
+	    	    if (places.length == 0) {
+	    	      return;
+	    	    }
+	    	    for (var i = 0, marker; marker = markers[i]; i++) {
+	    	      marker.setMap(null);
+	    	    }
+
+	    	    // For each place, get the icon, place name, and location.
+	    	    markers = [];
+	    	    var bounds = new google.maps.LatLngBounds();
+	    	    for (var i = 0, place; place = places[i]; i++) {
+	    	      var image = {
+	    	        url: place.icon,
+	    	        size: new google.maps.Size(71, 71),
+	    	        origin: new google.maps.Point(0, 0),
+	    	        anchor: new google.maps.Point(17, 34),
+	    	        scaledSize: new google.maps.Size(25, 25)
+	    	      };
+
+	    	      // Create a marker for each place.
+	    	      var marker = new google.maps.Marker({
+	    	        map: map,
+	    	        icon: image,
+	    	        title: place.name,
+	    	        position: place.geometry.location
+	    	      });
+
+	    	      markers.push(marker);
+
+	    	      bounds.extend(place.geometry.location);
+	    	    }
+
+	    	    map.fitBounds(bounds);
+	    	  });
+	    	  // [END region_getplaces]
+
+	    	  // Bias the SearchBox results towards places that are within the bounds of the
+	    	  // current map's viewport.
+	    	  google.maps.event.addListener(map, 'bounds_changed', function() {
+	    	    var bounds = map.getBounds();
+	    	    searchBox.setBounds(bounds);
+	    	  });
+	    	}
+	      
+	      function showHide(){
+	  			
+		  		console.log("I am in the show hide");
+		  			$("#searchButton").click(function(e){
+		  				e.preventDefault();
+		  				$("#pac-input").toggle();
+		  			});
+	    	  
+	      }
+	    	  
+	      
  	
   </script> 
 	
 
- <c:forEach items="${pingrList}" var="element">  
+
+  <c:forEach items="${pingrList}" var="element">  
   <script type="text/javascript">
   	  
   		/**
@@ -271,13 +265,20 @@
             
     </script>
      </c:forEach>
-
+     
+     
+     
+					<form method="get" action="/PingrHib/PingrBeanController" id="myCommentForm" >
+					<input type="hidden"  />
+					</form>
       	
 				    <form method="get" action="/PingrHib/SendResponse" id="myForm"> 
 				    <input type="hidden" id="idGiusto" name="idGiusto" /> 
 				    <input type="hidden" id="down" name="down" />
 				    <input type="hidden" id="up" name="up" />
 				 	</form>
+				
+				
 				
 <div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
     <div class="container">
@@ -293,14 +294,14 @@
     </div>
 </div>
        
- <input id="pac-input" class="controls" type="text" placeholder="Search">
+<input id="pac-input" class="controls" type="text" placeholder="Search" style="display:none"> 
  <div id="map-canvas" style="height: 100%, width: 100%;"></div>
 
 
 <div class="navbar navbar-inverse navbar-fixed-bottom" role="navigation">
     <div class="container">
-        <div class="navbar-header pull-left">
-            <a href="#" class="navbar-brand" id="searchButton"><span class="glyphicon glyphicon-search bigger extraP"></span></a>
+ <div id="searchButton" class="navbar-header pull-left" onclick="searchBitch(); showHide()">
+            <a href="#" class="navbar-brand"><span class="glyphicon glyphicon-search bigger extraP"></span></a>
         </div>
 
 		<div class="navbar-header pull-right littleP">
