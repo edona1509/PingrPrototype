@@ -31,7 +31,7 @@
 	  	console.log("I am in initialize");
 	  	  directionsDisplay = new google.maps.DirectionsRenderer();
     	   var mapOptions = {
-    	    zoom:10,
+    	    zoom:12,
     	   };
     	   
     	   
@@ -120,14 +120,14 @@
 	    	      };
 
 	    	      // Create a marker for each place.
-	    	      var marker = new google.maps.Marker({
+/* 	    	      var marker = new google.maps.Marker({
 	    	        map: map,
 	    	        icon: image,
 	    	        title: place.name,
 	    	        position: place.geometry.location
-	    	      });
+	    	      }); 
 
-	    	      markers.push(marker);
+	    	      markers.push(marker);*/
 
 	    	      bounds.extend(place.geometry.location);
 	    	    }
@@ -141,6 +141,7 @@
 	    	  google.maps.event.addListener(map, 'bounds_changed', function() {
 	    	    var bounds = map.getBounds();
 	    	    searchBox.setBounds(bounds);
+	    	    map.setZoom(12);
 	    	  });
 	    	}
 	      
