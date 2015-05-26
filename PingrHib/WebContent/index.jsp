@@ -130,14 +130,23 @@
   	          				'<input type="submit" value="Down vote" onclick="voteDown('+ down + ','+idGiusto+ ','+ up +'),voteAlert()" form="myForm"></input>'+
   	          				'<p> </p>' +
   	          				'<p> Add a comment to this Ping!</p>' +
-  	          				'<textarea class="form-control" id="commentArea" name="commentArea" rows="2"> </textarea>'+
-  	          				'<input type="submit" value="Send comment" onclick="" form="myFormComment" ></input>');
+  	          				'<textarea class="form-control" id="commentArea" rows="2"> </textarea>'+
+  	          				'<input type="submit" value="Send comment" onclick="sendComment()" form="myCommentForm" ></input>');
   	                infowindow.open(map, marker);
   	            }
   	  		})(marker, showContent, up, down, idGiusto));
   	 
   	  	  }
   	  	  
+  	 }
+  	  
+  	 
+  	 function sendComment(){
+  		
+  		var comment = document.getElementById("commentArea").value;
+  		alert(comment);
+  		 
+  		 
   	 }
   	 
    	 function voteDown(down, idGiusto, up){
@@ -146,8 +155,6 @@
 			  idGiusto;
 			  up;
 			  document.getElementById('downID').innerHTML = 'Down: '+ down 
-			  
-							
 			  document.getElementById('idGiusto').value = idGiusto
 		 	  document.getElementById('down').value = down
 		 	  document.getElementById('up').value = up
@@ -162,10 +169,7 @@
   	  		idGiusto;
   	  		down;
   	  		document.getElementById('upID').innerHTML = 'Up: '+ up 
-  	  			  		
-  	  	 
-  			
-  			document.getElementById('idGiusto').value = idGiusto
+  	  		document.getElementById('idGiusto').value = idGiusto
   			document.getElementById('up').value = up
   			document.getElementById('down').value = down
   			
@@ -176,12 +180,20 @@
             
     </script>
      </c:forEach>
+     
+     
+     
+					<form method="get" action="/PingrHib/PingrBeanController" id="myCommentForm" >
+					<input type="hidden"  />
+					</form>
       	
 				    <form method="get" action="/PingrHib/SendResponse" id="myForm"> 
 				    <input type="hidden" id="idGiusto" name="idGiusto" /> 
 				    <input type="hidden" id="down" name="down" />
 				    <input type="hidden" id="up" name="up" />
 				 	</form>
+				
+				
 				
 <div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
     <div class="container">
