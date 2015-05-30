@@ -9,6 +9,7 @@
     <welcome-file>default.htm</welcome-file>
     <welcome-file>default.jsp</welcome-file>
   </welcome-file-list>
+ 
   <servlet>
     <servlet-name>PingrBeanController</servlet-name>
     <servlet-class>pingr.controller.PingrBeanController</servlet-class>
@@ -17,14 +18,16 @@
     <servlet-name>PingrBeanController</servlet-name>
     <url-pattern>/PingrBeanController</url-pattern>
   </servlet-mapping>
+  
   <servlet>
-   <servlet-name>FetchData</servlet-name>
+    <servlet-name>FetchData</servlet-name>
     <servlet-class>pingr.controller.FetchData</servlet-class>
   </servlet>
   <servlet-mapping>
     <servlet-name>FetchData</servlet-name>
     <url-pattern>/FetchData</url-pattern>
   </servlet-mapping>
+ 
   <servlet>
     <servlet-name>SendResponse</servlet-name>
     <servlet-class>pingr.controller.SendResponse</servlet-class>
@@ -32,5 +35,23 @@
   <servlet-mapping>
     <servlet-name>SendResponse</servlet-name>
     <url-pattern>/SendResponse</url-pattern>
+  </servlet-mapping>
+  
+  <servlet>
+    <servlet-name>SaveComment</servlet-name>
+    <servlet-class>pingr.controller.SaveComment</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>SaveComment</servlet-name>
+    <url-pattern>/SaveComment</url-pattern>
+  </servlet-mapping>
+  
+    <servlet>
+    <servlet-name>SendResponseDown</servlet-name>
+    <servlet-class>pingr.controller.SendResponseDown</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>SendResponseDown</servlet-name>
+    <url-pattern>/SendResponseDown</url-pattern>
   </servlet-mapping>
 </web-app>

@@ -19,7 +19,6 @@ public class PingrManager {
 		Session session = sessionFactory.getCurrentSession();
 		// start transaction
 		session.beginTransaction();
-		
 		// Save the Model object
 		session.save(pingr);
 		// Commit transaction
@@ -27,8 +26,21 @@ public class PingrManager {
 				
 	}
 	
+	
+	public static void saveCommentDetails(CommentBean comment){
+				// Get Session
+				SessionFactory sessionFactory = HibernateUtil.getSessionAnnotationFactory();
+				Session session = sessionFactory.getCurrentSession();
+				// start transaction
+				session.beginTransaction();
+				// Save the Model object
+				session.save(comment);
+				// Commit transaction
+				session.getTransaction().commit();
+	}
+	
 	public static void savePingrElements(int id, int up_vote, int down_vote){
-		// Get Session
+				// Get Session
 				SessionFactory sessionFactory = HibernateUtil.getSessionAnnotationFactory();
 				Session session = sessionFactory.getCurrentSession();
 				// start transaction
@@ -37,8 +49,8 @@ public class PingrManager {
 				PingrBean pingr = (PingrBean)session.get(PingrBean.class,id);
 				pingr.setUp_vote(up_vote);
 				pingr.setDown_vote(down_vote);
-				session.update(pingr);
 				
+				session.update(pingr);
 				
 				// Commit transaction
 				session.getTransaction().commit();
@@ -60,19 +72,7 @@ public class PingrManager {
 		return entry;
 	}
 	
-	
-	public static void saveCommentDetails(CommentBean comment){
-		
-		// Get Session
-				SessionFactory sessionFactory = HibernateUtil.getSessionAnnotationFactory();
-				Session session = sessionFactory.getCurrentSession();
-				// start transaction
-				session.beginTransaction();
-				// Save the Model object
-				session.save(comment);
-				// Commit transaction
-				session.getTransaction().commit();
-	}
+
 
 	public static List<PingrBean> getAllInfo(){
 		
@@ -81,29 +81,54 @@ public class PingrManager {
 				Session session = sessionFactory.getCurrentSession();
 				// start transaction
 				session.beginTransaction();
-				
-				
-//				// Save the Model object
-//				PingrBean user =  (PingrBean)session.get(PingrBean.class,id);
-				
+
 				String hql = "FROM PingrBean";
 				Query query = session.createQuery(hql);
 				
 				List<PingrBean> results = query.list();
-				// session.createCriteria(PingrBean.class).list();
-
-				for(int i=0;i<results.size();i++){
-				   
-					//System.out.println(results.get(i));
-					PingrBean pingr = (PingrBean) results.get(i);
-					
-					
-				}
 				
 				// Commit transaction
 				session.getTransaction().commit();
 				
 				return results;
 	}
+	
+	public static List<CommentBean> getAllComments(){
+		
+		// Get Session
+		SessionFactory sessionFactory = HibernateUtil.getSessionAnnotationFactory();
+		Session session = sessionFactory.getCurrentSession();
+		// start transaction
+		session.beginTransaction();
+
+		String hql = "FROM CommentBean";
+		Query query = session.createQuery(hql);
+		
+		List<CommentBean> comments = query.list();
+		
+		// Commit transaction
+		session.getTransaction().commit();
+		
+		return comments;
+}
+	
+	public static PingrBean retrivePing(int idGiusto){
+		
+				// Get Session
+				SessionFactory sessionFactory = HibernateUtil.getSessionAnnotationFactory();
+				Session session = sessionFactory.getCurrentSession();
+				// start transaction
+				session.beginTransaction();
+				
+				
+				PingrBean pingr = (PingrBean) session.get(PingrBean.class, idGiusto);
+							
+				// Commit transaction
+				session.getTransaction().commit();
+		
+				return pingr;
+	}
+	
+	
 	
 }

@@ -25,7 +25,17 @@ public class CommentBean {
 	@ManyToOne
 	@JoinColumn(name="pingr_id")
 	private PingrBean PingrBean;
-
+	
+	private int theKey;
+	
+	public int getTheKey(){
+		return theKey;
+	}
+		
+	public void setTheKey(int theKey){
+		this.theKey = theKey;
+	}
+	
 	public int getCommentID() {
 		return commentID;
 	}
@@ -49,6 +59,8 @@ public class CommentBean {
 	public void setPingr(PingrBean PingrBean) {
 		this.PingrBean = PingrBean;
 	}
+	
+	
 	
 	
 }

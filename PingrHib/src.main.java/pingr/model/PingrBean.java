@@ -1,7 +1,6 @@
 package pingr.model;
 
-import java.util.Set;
-
+import java.util.List;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -41,15 +40,15 @@ public class PingrBean {
 	
 
 	@OneToMany(mappedBy="PingrBean")
-	private Set<CommentBean> comments;
+	private List<CommentBean> comments;
 
 	// Getters and Setters
 	
-	public Set<CommentBean> getComments() {
+	public List<CommentBean> getComments() {
 		return comments;
 	}
 
-	public void setComments(Set<CommentBean> comments) {
+	public void setComments(List<CommentBean> comments) {
 		this.comments = comments;
 	}
 	

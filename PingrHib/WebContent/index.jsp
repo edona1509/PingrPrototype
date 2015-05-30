@@ -2,6 +2,7 @@
 <%@ page import="java.util.List"%>
 <!DOCTYPE html>
 <% List pingrList = (List)session.getAttribute("pingrList");%>
+<% List commentList = (List)session.getAttribute("commentList"); %>
 <html lang="en">
 <head>
 
@@ -11,14 +12,19 @@
     <link rel="stylesheet" href="booty.css">
     <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css"> 
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+ 
   <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
   <script src="https://maps.googleapis.com/maps/api/js"> </script>
+  
+   <script src="http://code.jquery.com/jquery-1.10.2.js"></script>
    
 </head>
 <body>
 
  <script type="text/javascript">
   var pings = [];
+  var comments =[];
+  
   var map;
   function voteAlert() {window.alert("Thank you for voting a Ping!");}
  </script>
@@ -72,10 +78,20 @@
 	      detectBrowser();
  	
   </script> 
+  
+  <c:forEach items="${commentList}" var="commentElement">  
+  <script type="text/javascript">
+  
+  	 var commentContent = '${commentElement.commentContent}';
+	 var foreignKey = '${commentElement.theKey}';
 	
-
-
-  <c:forEach items="${pingrList}" var="element">  
+	 comments.push([commentContent,foreignKey]);
+   	// alert(comments);		  
+  
+  </script>
+ </c:forEach>	
+ 
+  <c:forEach items="${pingrList}" var="element">    		 
   <script type="text/javascript">
   	  
   		/**
@@ -84,126 +100,208 @@
      	 * other.
      	 */
      		
-     		 var id = '${element.pingrID}'
+     		 var id = '${element.pingrID}';
        		 var upvote = '${element.up_vote}';
       		 var downvote = '${element.down_vote}'; 
       		 var cat = '${element.category}';
   			 var lat = '${element.latitude}';
   			 var lon = '${element.longitude}';
   			 var content = '${element.content}';
-  			
 
-  	 
+   	
   	  pings.push([content, lat, lon, cat, downvote, upvote, id]);
-   
+   //	alert("Length of pings " + pings.length);
   	  function setMarkers(map, locations) {
-  	  	  // Add markers to the map
+  	  	
+  		  // Add markers to the map
   	  	  // Marker sizes are expressed as a Size of X,Y
   	  	  // where the origin of the image (0,0) is located
   	  	  // in the top left of the image.
 
   	  	 var infowindow = new google.maps.InfoWindow();
   	  	
-  	  	  for (var i = 0; i < locations.length; i++) {
-  	  		  
+  	  	  for (var i = 0; i<locations.length; i++) {
+  	  		
   	  	    var ping = locations[i];
   	  	    var showContent = locations[i][0];
   	  	    var up = locations[i][5];
   	  	    var down = locations[i][4];
   	  	    var idGiusto = locations[i][6];
   	  	    var myLatLng = new google.maps.LatLng(ping[1], ping[2]);
-  	 		
+  	 		 
+  	  		var commentoGiusto = [];
+  	  	    for(var j=0; j<comments.length; j++){
+  	  	    	var chiave = comments[j][1];
+  	  	      	if (idGiusto == chiave){
+  	  	      	commentoGiusto.push(comments[j][0]);
+  	  	    	}
   	  	    
-  	  	
+  	  	  	   
   	  	    var marker = new google.maps.Marker({
   	  	        position: myLatLng,
   	  	        map: map,
   	  	        infowindow: infowindow
   	  	    });
   	  	    
-  	  	  
-  	  	    var comment;
-  	  	  	 google.maps.event.addListener(marker, 'click',  (function(marker, showContent, up, down, idGiusto) {
+  	   	  	  
+  	  	   	 var comment;
+  	  	  	 google.maps.event.addListener(marker, 'click',  (function(marker, showContent, up, down, idGiusto, comment, commentoGiusto) {
   	  		  return function() {
+  	  		
   	                infowindow.setContent('<p>Ping: '+ showContent +'</p>'+ 
-  	                		'<p id="upID" > Up: '+ up +'</p>'+
-  	                		'<p id="downID" > Down: '+ down +'</p>'+
-  	        				'<input type="submit" value="Up vote" onclick="voteUp('+ up + ','+ idGiusto +','+ down+'),voteAlert()"   form="myForm" ></input>'+
-  	          				'<input type="submit" value="Down vote" onclick="voteDown('+ down + ','+idGiusto+ ','+ up +'),voteAlert()" form="myForm"></input>'+
-  	          				'<p> </p>' +
+  	                		'<p id="upFieldID"> Up: '+ '<p id="upID">'+ up +' </p>' +'</p>'+
+  	                		'<p id="downFieldID" > Down: '+ '<p id="downID">'+ down +' </p>' +'</p>'+
+  	        				'<input type="submit" id="upClick" value="Up vote" onclick="sendUpVote('+ document.getElementById('upID') + ','+ idGiusto +','+ down+')"  ></input>'+
+  	          				'<input type="submit" id="downClick" value="Down vote" onclick="sendDownvote('+ document.getElementById('downID') + ','+idGiusto+ ','+ up +')" ></input>'+
+  	          				'<p> Comments: '+ commentoGiusto +'</p>' +
+  	          				'<p id="commentID"> </p>'+
   	          				'<p> Add a comment to this Ping!</p>' +
-  	          				'<textarea class="form-control" name="comment" id="commentArea" rows="2"></textarea>'+
-  	          				'<input type="submit" value="Send comment" onclick="sendComment('+ idGiusto +')" form="myCommentForm"></input>');
+  	          				'<textarea class="form-control" id="commentArea" rows="2"></textarea>'+
+  	          				'<input type="submit" id="commentClick" value="Send comment" onclick="sendComment('+ idGiusto + ','+ comment+')" ></input>');
   	                infowindow.open(map, marker);
   	            }
-  	  		})(marker, showContent, up, down, idGiusto));
+  	  		})(marker, showContent, up, down, idGiusto, comment, commentoGiusto));
   	 
   	  	  }
+  	  	}
   	  	  
   	 }
+  	 
+  ////////////////////////////////// UP VOTE /////////////////////////////
+  	function sendUpVote(upVooote, idGiusto, down)
+  	{
+  		
+  		var currentUpVote = document.getElementById('upID').innerHTML;
+  	//	alert("Become "+ currentUpVote);
+  
+  	var xmlhttp;
+  	if (window.XMLHttpRequest)
+  	  {// code for IE7+, Firefox, Chrome, Opera, Safari
+  	  xmlhttp=new XMLHttpRequest();
+  	  }
+  	else
+  	  {// code for IE6, IE5
+  	  xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
+  	  }
+  	xmlhttp.onreadystatechange=function()
+  	  {
+  	  if (xmlhttp.readyState==4 && xmlhttp.status==200)
+  	    {
+  		 // alert(xmlhttp.responseText);
+  	    document.getElementById("upID").innerHTML= xmlhttp.responseText;
+  	   
+  	    }
   	  
-   
-  	 function sendComment(idGiusto){
+  	}
+  	//alert("Doing something");
+  	currentUpVote++;
+  	xmlhttp.open("GET","SendResponse?up="+currentUpVote+"&down="+down+"&idGiusto="+idGiusto,true);
+  	xmlhttp.send();
+  	//alert("After all");
+  	}
+  	   
+  	//////////////// DOWN VOTE ///////////////////////
+  	function sendDownvote(downVooote, idGiusto, up)
+  	{  		
+  		var currentDownVote = document.getElementById('downID').innerHTML;
+  		//alert("Become "+ currentDownVote);
+  
+  	var xmlhttp;
+  	if (window.XMLHttpRequest)
+  	  {// code for IE7+, Firefox, Chrome, Opera, Safari
+  	  xmlhttp=new XMLHttpRequest();
+  	  }
+  	else
+  	  {// code for IE6, IE5
+  	  xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
+  	  }
+  	xmlhttp.onreadystatechange=function()
+  	  {
+  	  if (xmlhttp.readyState==4 && xmlhttp.status==200)
+  	    {
+  		 // alert(xmlhttp.responseText);
+  	    document.getElementById("downID").innerHTML= xmlhttp.responseText;
+   	   
+  	    }
+  	  
+  	}
+  	//alert("Doing something");
+  	currentDownVote++;
+  	xmlhttp.open("GET","SendResponseDown?down="+currentDownVote+"&up="+up+"&idGiusto="+idGiusto,true);
+  	xmlhttp.send();
+  	//alert("After all");
+  	}
+  
+  	function sendUpVote(upVooote, idGiusto, down)
+  	{
+  		
+  		var currentUpVote = document.getElementById('commentArea').innerHTML;
+  	//	alert("Become "+ currentUpVote);
+  
+  	var xmlhttp;
+  	if (window.XMLHttpRequest)
+  	  {// code for IE7+, Firefox, Chrome, Opera, Safari
+  	  xmlhttp=new XMLHttpRequest();
+  	  }
+  	else
+  	  {// code for IE6, IE5
+  	  xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
+  	  }
+  	xmlhttp.onreadystatechange=function()
+  	  {
+  	  if (xmlhttp.readyState==4 && xmlhttp.status==200)
+  	    {
+  		 // alert(xmlhttp.responseText);
+  	    document.getElementById("upID").innerHTML= xmlhttp.responseText;
+  	   
+  	    }
+  	  
+  	}
+   	currentUpVote++;
+  	xmlhttp.open("GET","SendResponse?up="+currentUpVote+"&down="+down+"&idGiusto="+idGiusto,true);
+  	xmlhttp.send();
+  
+  	}
+  	   
+  	//////////////// SEND COMMENTS  ///////////////////////
+  	function sendComment(idGiusto, content)
+  	{  		
+  		var currentComment = document.getElementById('commentArea').value;
+  		//alert("Become "+ currentDownVote);
+  
+  	var xmlhttp;
+  	if (window.XMLHttpRequest)
+  	  {// code for IE7+, Firefox, Chrome, Opera, Safari
+  	  xmlhttp=new XMLHttpRequest();
+  	  }
+  	else
+  	  {// code for IE6, IE5
+  	  xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
+  	  }
+  	xmlhttp.onreadystatechange=function()
+  	  {
+  	  if (xmlhttp.readyState==4 && xmlhttp.status==200)
+  	    {
+  		 // alert(xmlhttp.responseText);
+  	    document.getElementById("commentID").innerHTML= xmlhttp.responseText;
+   	   
+  	    }
+  	  
+  	}
   	
-  	 	
-  		comment = document.getElementById('commentArea').value;
-  		document.getElementById('idGiusto').value = idGiusto
-  		
-  		
-  		alert(comment);
-  		
-  		 
-  	 }
-  	 
-  	 
-   	 function voteDown(down, idGiusto, up){
-			  
-			  down++;
-			  idGiusto;
-			  up;
-			  document.getElementById('downID').innerHTML = 'Down: '+ down 
-			  document.getElementById('idGiusto').value = idGiusto
-		 	  document.getElementById('down').value = down
-		 	  document.getElementById('up').value = up
-		 	 
-		 	   
-		  }
+  	alert(currentComment);
+  	xmlhttp.open("GET","SaveComment?comment="+currentComment+"&idGiusto="+idGiusto,true);
+  	xmlhttp.send();
+  	
+  	}
 
-   	 
-    	function voteUp(up, idGiusto, down) {
-  			
-  	  		up++;
-  	  		idGiusto;
-  	  		down;
-  	  		document.getElementById('upID').innerHTML = 'Up: '+ up 
-  	  		document.getElementById('idGiusto').value = idGiusto
-  			document.getElementById('up').value = up
-  			document.getElementById('down').value = down
-  			
-  			
-  	  	}
-  	  	 
-
-            
+  	           
     </script>
-     </c:forEach>
-     
-     
-      				<form method="get" action="/PingrHib/SendResponse" id="myForm"> 
-				    <input type="hidden" id="idGiusto" name="idGiusto" /> 
-				    <input type="hidden" id="down" name="down" />
-				    <input type="hidden" id="up" name="up" />
-				 	</form>
-				
-      	
-     
-					<form method="get" action="/PingrHib/PingrBeanController" id="myCommentForm">
-					<input type="hidden" id="comment" name="comment" value="${comment}" />
-					<input type="hidden" id="idGiusto" name="idGiusto" /> 
-					</form>
-					
-				  
-				
+    		
+    	 </c:forEach>	
+   
+
+        	
 				
 <div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
     <div class="container">

@@ -52,20 +52,20 @@ public class SendResponse extends HttpServlet  {
 		
 		String id = request.getParameter("idGiusto");
 		int idPing = Integer.parseInt(id);
-		System.out.println("L'id è : "+id);
-	
+		System.out.println("L'id è : "+ id);
+		
+		String upVote = request.getParameter("up");
+		int votoSu = Integer.parseInt(upVote);
+		System.out.println("Voto su è ora: "+ upVote);
+		
+		String downVote = request.getParameter("down");
+		int votoGiu = Integer.parseInt(downVote);
+		System.out.println("Voto giù è ora: "+ downVote);
+		
 		
 		List<PingrBean> pingrList = PingrManager.getAllInfo();
-		
-	
-	    String upVote = request.getParameter("up");
-	    System.out.println("Voto su è ora: "+ upVote);
-	    String downVote = request.getParameter("down");
-	    System.out.println("Voto giù è ora: "+ downVote);
-	    
-	    int votoSu = Integer.parseInt(upVote);
-	    int votoGiu = Integer.parseInt(downVote);
-	  	
+			
+	 	
 	    for(int i=0;i<pingrList.size();i++){
 	   
 	    	int idDellaLista = pingrList.get(i).getPingrID();
@@ -82,10 +82,12 @@ public class SendResponse extends HttpServlet  {
 	    	
 	    }
 	    
-	   	response.setContentType("text/html");
-		request.setAttribute("pingrList", pingrList);
-		request.getRequestDispatcher("index.jsp").forward(request, response);
-		
+	   	response.setContentType("text/plain");
+		System.out.println("I'm sending: "+ upVote);
+		response.getWriter().write(upVote);
+		//request.setAttribute("pingrList", pingrList);
+		//request.getRequestDispatcher("index.jsp").forward(request, response);
+	   
 		
 	}
 	
