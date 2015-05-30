@@ -41,7 +41,6 @@
     <servlet-name>SaveComment</servlet-name>
     <url-pattern>/SaveComment</url-pattern>
   </servlet-mapping>
-  
   <servlet>
     <servlet-name>SendResponseDown</servlet-name>
     <servlet-class>pingr.controller.SendResponseDown</servlet-class>
@@ -50,13 +49,20 @@
     <servlet-name>SendResponseDown</servlet-name>
     <url-pattern>/SendResponseDown</url-pattern>
   </servlet-mapping>
-  
-    <servlet>
-    <servlet-name>InfoWindowData</servlet-name>
-    <servlet-class>pingr.controller.InfoWindowData</servlet-class>
+  <servlet>
+    <servlet-name>InfoWindowDataUpVote</servlet-name>
+    <servlet-class>pingr.controller.InfoWindowDataUpVote</servlet-class>
   </servlet>
   <servlet-mapping>
-    <servlet-name>InfoWindowData</servlet-name>
-    <url-pattern>/InfoWindowData</url-pattern>
+    <servlet-name>InfoWindowDataUpVote</servlet-name>
+    <url-pattern>/InfoWindowDataUpVote</url-pattern>
+  </servlet-mapping>
+   <servlet>
+    <servlet-name>InfoWindowDataDownVote</servlet-name>
+    <servlet-class>pingr.controller.InfoWindowDataDownVote</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>InfoWindowDataDownVote</servlet-name>
+    <url-pattern>/InfoWindowDataDownVote</url-pattern>
   </servlet-mapping>
 </web-app>

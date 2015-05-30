@@ -146,9 +146,8 @@
   	   	  	  
   	  	   	 var comment;
   	  	  	 google.maps.event.addListener(marker, 'click',  (function(marker, showContent, up, down, idGiusto, comment, commentoGiusto) {
-  	  		  return function() {
-  	  		
-  	                infowindow.setContent('<p>Ping: '+ showContent +'</p>'+ 
+  	  	  	  return function() {
+  	  			    infowindow.setContent('<p>Ping: '+ showContent +'</p>'+ 
   	                		'<p id="upFieldID"> Up: '+ '<p id="upID">'+ up +' </p>' +'</p>'+
   	                		'<p id="downFieldID" > Down: '+ '<p id="downID">'+ down +' </p>' +'</p>'+
   	        				'<input type="submit" id="upClick" value="Up vote" onclick="sendUpVote('+ document.getElementById('upID') + ','+ idGiusto +','+ down+')"  ></input>'+
@@ -159,21 +158,63 @@
   	          				'<textarea class="form-control" id="commentArea" rows="2"></textarea>'+
   	          				'<input type="submit" id="commentClick" value="Send comment" onclick="sendComment('+ idGiusto + ','+ comment+')" ></input>');
   	                infowindow.open(map, marker);
-  	            }
-  	  		})(marker, showContent, up, down, idGiusto, comment, commentoGiusto));
-  	 
+  	              	retriveTheNewUpVote(idGiusto);
+  	            	retriveTheNewDownVote(idGiusto);
+  	          	}
+  	  	  	 
+  	  	  	  
+  	  		})(marker, showContent, up, down, idGiusto, comment, commentoGiusto)); 
+  	 	  
   	  	  }
   	  	}
   	  	  
   	 }
-  	 
+//////////////////// Show new up vote ///////////////////  	  
+  	  function retriveTheNewUpVote(idGiusto){
+  		 	  	   
+  		var xmlhttp;
+  	  	if (window.XMLHttpRequest)
+    	  {// code for IE7+, Firefox, Chrome, Opera, Safari
+    	  xmlhttp=new XMLHttpRequest();
+    	  }
+    	else
+    	  {// code for IE6, IE5
+    	  xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
+    	  }
+    	xmlhttp.onreadystatechange=function(){
+    	
+    		document.getElementById("upID").innerHTML= xmlhttp.responseText;
+    		
+    	}
+    	xmlhttp.open("GET","InfoWindowDataUpVote?idGiusto="+idGiusto,true);
+      	xmlhttp.send();
+  		  
+  	  }
+ /////////// Show the new down vote ////////////////////
+   function retriveTheNewDownVote(idGiusto){
+  		 var xmlhttp;
+  	  	if (window.XMLHttpRequest)
+    	  {// code for IE7+, Firefox, Chrome, Opera, Safari
+    	  xmlhttp=new XMLHttpRequest();
+    	  }
+    	else
+    	  {// code for IE6, IE5
+    	  xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
+    	  }
+    	xmlhttp.onreadystatechange=function(){
+    	
+    		document.getElementById("downID").innerHTML= xmlhttp.responseText;
+    		
+    	}
+    	xmlhttp.open("GET","InfoWindowDataDownVote?idGiusto="+idGiusto,true);
+      	xmlhttp.send();
+  		  
+  	  }
   ////////////////////////////////// UP VOTE /////////////////////////////
   	function sendUpVote(upVooote, idGiusto, down)
-  	{
-  		
+  	{  		
   		var currentUpVote = document.getElementById('upID').innerHTML;
-  	//	alert("Become "+ currentUpVote);
-  
+   
   	var xmlhttp;
   	if (window.XMLHttpRequest)
   	  {// code for IE7+, Firefox, Chrome, Opera, Safari
@@ -187,25 +228,21 @@
   	  {
   	  if (xmlhttp.readyState==4 && xmlhttp.status==200)
   	    {
-  		 // alert(xmlhttp.responseText);
   	    document.getElementById("upID").innerHTML= xmlhttp.responseText;
   	   
   	    }
   	  
   	}
-  	//alert("Doing something");
   	currentUpVote++;
   	xmlhttp.open("GET","SendResponse?up="+currentUpVote+"&down="+down+"&idGiusto="+idGiusto,true);
   	xmlhttp.send();
-  	//alert("After all");
   	}
   	   
   	//////////////// DOWN VOTE ///////////////////////
   	function sendDownvote(downVooote, idGiusto, up)
   	{  		
   		var currentDownVote = document.getElementById('downID').innerHTML;
-  		//alert("Become "+ currentDownVote);
-  
+  		
   	var xmlhttp;
   	if (window.XMLHttpRequest)
   	  {// code for IE7+, Firefox, Chrome, Opera, Safari
@@ -219,28 +256,24 @@
   	  {
   	  if (xmlhttp.readyState==4 && xmlhttp.status==200)
   	    {
-  		 // alert(xmlhttp.responseText);
+  		
   	    document.getElementById("downID").innerHTML= xmlhttp.responseText;
    	   
   	    }
   	  
   	}
-  	//alert("Doing something");
+  	
   	currentDownVote++;
   	xmlhttp.open("GET","SendResponseDown?down="+currentDownVote+"&up="+up+"&idGiusto="+idGiusto,true);
   	xmlhttp.send();
-  	//alert("After all");
-  	}
   
-  	
-  	   
+  	}
+    	   
   	//////////////// SEND COMMENTS  ///////////////////////
   	function sendComment(idGiusto, content)
   	{  		
   		var currentComment = document.getElementById('commentArea').value;
-  		//alert("Become "+ currentDownVote);
-  
-  	var xmlhttp;
+  		var xmlhttp;
   	if (window.XMLHttpRequest)
   	  {// code for IE7+, Firefox, Chrome, Opera, Safari
   	  xmlhttp=new XMLHttpRequest();
@@ -260,7 +293,6 @@
   	  
   	}
   	
-  	alert(currentComment);
   	xmlhttp.open("GET","SaveComment?comment="+currentComment+"&idGiusto="+idGiusto,true);
   	xmlhttp.send();
   	
@@ -268,12 +300,8 @@
 
   	           
     </script>
-    		
-    	 </c:forEach>	
-   
-
-        	
-				
+      	 </c:forEach>	
+ 				
 <div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
     <div class="container">
         <div class="navbar-header pull-left">

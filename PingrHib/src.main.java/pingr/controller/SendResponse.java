@@ -80,8 +80,7 @@ public class SendResponse extends HttpServlet  {
 		response.getWriter().write(upVote);
 		//request.setAttribute("pingrList", pingrList);
 		//request.getRequestDispatcher("index.jsp").forward(request, response);
-	   
-		
+	 
 	}
 	
 	/**
