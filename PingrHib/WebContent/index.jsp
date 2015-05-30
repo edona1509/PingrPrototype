@@ -107,8 +107,8 @@
   			 var lat = '${element.latitude}';
   			 var lon = '${element.longitude}';
   			 var content = '${element.content}';
-
-   	
+		   
+  		  	
   	  pings.push([content, lat, lon, cat, downvote, upvote, id]);
    //	alert("Length of pings " + pings.length);
   	  function setMarkers(map, locations) {
@@ -124,11 +124,21 @@
   	  		
   	  	    var ping = locations[i];
   	  	    var showContent = locations[i][0];
+  	  	    var categoria = locations[i][3];
   	  	    var up = locations[i][5];
   	  	    var down = locations[i][4];
   	  	    var idGiusto = locations[i][6];
   	  	    var myLatLng = new google.maps.LatLng(ping[1], ping[2]);
   	 		 
+  	  	   if( categoria =="Gossip"){
+  	  		   	var pinImage = new google.maps.MarkerImage("http://maps.google.com/mapfiles/ms/icons/red-dot.png");
+   	  	  	  	
+   	  	  	    } else if(categoria=="News"){
+   	  	   	    var pinImage = new google.maps.MarkerImage("http://maps.google.com/mapfiles/ms/icons/green-dot.png");
+   	  	  	    	
+   	  	  	    } else if (categoria == "Business"){
+   	  	  	    	var pinImage = new google.maps.MarkerImage("http://maps.google.com/mapfiles/ms/icons/blue-dot.png");
+   	  	  	    }
   	  		var commentoGiusto = [];
   	  	    for(var j=0; j<comments.length; j++){
   	  	    	var chiave = comments[j][1];
@@ -136,10 +146,11 @@
   	  	      	commentoGiusto.push(comments[j][0]);
   	  	    	}
   	  	    
-  	  	  	   
+  	  	  	    
   	  	    var marker = new google.maps.Marker({
   	  	        position: myLatLng,
   	  	        map: map,
+  	  	        icon: pinImage,
   	  	        infowindow: infowindow
   	  	    });
   	  	    

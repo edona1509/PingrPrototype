@@ -26,7 +26,7 @@ public class InfoWindowDataUpVote extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 		
-		System.out.println("Sono nel INFOWINDOWDATA");
+		//System.out.println("Sono nel INFOWINDOWDATA");
 		
 		String pingrID = request.getParameter("idGiusto");
 		int idPing = Integer.parseInt(pingrID);
@@ -35,7 +35,7 @@ public class InfoWindowDataUpVote extends HttpServlet {
 	
 		int up = pingr.getUp_vote();
 		String voto = String.valueOf(up);
-		System.out.println("Up in InfoWindowData: "+ up);
+		//System.out.println("Up in InfoWindowData: "+ up);
 		
 		response.setContentType("text/plain");
 		response.getWriter().write(voto);
