@@ -39,7 +39,7 @@ public class PingrManager {
 				session.getTransaction().commit();
 	}
 	
-	public static void savePingrElements(int id, int up_vote, int down_vote){
+	public static void savePingrElementsUP(int id, int up_vote){
 				// Get Session
 				SessionFactory sessionFactory = HibernateUtil.getSessionAnnotationFactory();
 				Session session = sessionFactory.getCurrentSession();
@@ -48,13 +48,28 @@ public class PingrManager {
 				
 				PingrBean pingr = (PingrBean)session.get(PingrBean.class,id);
 				pingr.setUp_vote(up_vote);
-				pingr.setDown_vote(down_vote);
-				
+								
 				session.update(pingr);
 				
 				// Commit transaction
 				session.getTransaction().commit();
 		
+	}
+	
+	public static void savePingrElementsDOWN(int id, int down_vote){
+		// Get Session
+		SessionFactory sessionFactory = HibernateUtil.getSessionAnnotationFactory();
+		Session session = sessionFactory.getCurrentSession();
+		// start transaction
+		session.beginTransaction();
+		
+		PingrBean pingr = (PingrBean)session.get(PingrBean.class,id);
+		pingr.setDown_vote(down_vote);
+		
+		session.update(pingr);
+		
+		// Commit transaction
+		session.getTransaction().commit();
 	}
 	
 	public static PingrBean getPingrDetails(int id) {

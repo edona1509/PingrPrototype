@@ -27,11 +27,7 @@ public class SendResponseDown extends HttpServlet {
 		String id = request.getParameter("idGiusto");
 		int idPing = Integer.parseInt(id);
 		System.out.println("L'id è : "+ id);
-		
-		String upVote = request.getParameter("up");
-		int votoSu = Integer.parseInt(upVote);
-		System.out.println("Voto su è ora: "+ upVote);
-		
+			
 		String downVote = request.getParameter("down");
 		int votoGiu = Integer.parseInt(downVote);
 		System.out.println("Voto giù è ora: "+ downVote);
@@ -46,10 +42,9 @@ public class SendResponseDown extends HttpServlet {
 	    	
 	    	if (idDellaLista == idPing) {
 	    		
-	    		pingrList.get(i).setUp_vote(votoSu);
 	    		pingrList.get(i).setDown_vote(votoGiu);
 	    			    		
-	    		PingrManager.savePingrElements(idPing, votoSu, votoGiu);
+	    		PingrManager.savePingrElementsDOWN(idPing, votoGiu);
 	    		
 	    	
 	    	}

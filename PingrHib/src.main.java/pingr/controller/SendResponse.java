@@ -58,24 +58,17 @@ public class SendResponse extends HttpServlet  {
 		int votoSu = Integer.parseInt(upVote);
 		System.out.println("Voto su è ora: "+ upVote);
 		
-		String downVote = request.getParameter("down");
-		int votoGiu = Integer.parseInt(downVote);
-		System.out.println("Voto giù è ora: "+ downVote);
-		
-		
 		List<PingrBean> pingrList = PingrManager.getAllInfo();
 			
-	 	
-	    for(int i=0;i<pingrList.size();i++){
+	 	for(int i=0;i<pingrList.size();i++){
 	   
 	    	int idDellaLista = pingrList.get(i).getPingrID();
 	    	
 	    	if (idDellaLista == idPing) {
 	    		
 	    		pingrList.get(i).setUp_vote(votoSu);
-	    		pingrList.get(i).setDown_vote(votoGiu);
-	    			    		
-	    		PingrManager.savePingrElements(idPing, votoSu, votoGiu);
+	    	    			    		
+	    		PingrManager.savePingrElementsUP(idPing, votoSu);
 	    		
 	    	
 	    	}
