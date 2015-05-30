@@ -55,7 +55,7 @@ public class SendResponseDown extends HttpServlet {
 	    	}
 	    	
 	    }
-	    
+	    //
 	   	response.setContentType("text/plain");
 		System.out.println("I'm sending from down: "+ downVote);
 		response.getWriter().write(downVote);

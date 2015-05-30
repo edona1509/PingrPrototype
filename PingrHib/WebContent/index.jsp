@@ -142,7 +142,7 @@
   	  	        map: map,
   	  	        infowindow: infowindow
   	  	    });
-  	  	    
+  	  	    //
   	   	  	  
   	  	   	 var comment;
   	  	  	 google.maps.event.addListener(marker, 'click',  (function(marker, showContent, up, down, idGiusto, comment, commentoGiusto) {

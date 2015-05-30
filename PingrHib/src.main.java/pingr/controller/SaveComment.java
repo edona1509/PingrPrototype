@@ -23,7 +23,7 @@ public class SaveComment extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
+		//
 		//////// Inserting comments by hand to see the relations in the database :D ///////////
 		
 		String commentFromGraphic = request.getParameter("comment");

@@ -111,6 +111,7 @@ public class PingrManager {
 		
 		return comments;
 }
+	//
 	
 	public static PingrBean retrivePing(int idGiusto){
 		

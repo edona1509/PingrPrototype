@@ -51,7 +51,7 @@ public class FetchData extends HttpServlet {
 		request.setAttribute("pingrList", pingrList);
 		request.setAttribute("commentList", commentList);
 		request.getRequestDispatcher("index.jsp").forward(request, response);
-		
+		//
 	
 		
 	}
