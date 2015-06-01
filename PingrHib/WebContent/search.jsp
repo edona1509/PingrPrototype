@@ -133,7 +133,7 @@
 <div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
     <div class="container">
         <div class="navbar-header pull-left">
-            <a class="navbar-brand" href="index.jsp">Pingr</a>
+            <a class="navbar-brand" href="/PingrHib/FetchData">Pingr</a>
         </div>
 
 		<div class="navbar-header pull-right littleP">

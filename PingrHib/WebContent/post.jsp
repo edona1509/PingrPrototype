@@ -94,13 +94,11 @@
 </head>
 	
 <body>
-    	<script>
-	function showAlert(){window.alert("Thank you for posting a Ping!");}
-	</script>
-<div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+    
+ <div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
     <div class="container">
         <div class="navbar-header pull-left">
-            <a class="navbar-brand" href="index.jsp">Pingr</a>
+            <a class="navbar-brand" href="/PingrHib/FetchData">Pingr</a>
         </div>
 
 		<div class="navbar-header pull-right littleP">
@@ -130,7 +128,7 @@
     </div> 
             
         </div>
-        <input class="btn btn-info btn-block" type="submit" value="Ping" onclick="showAlert()"/>
+        <input class="btn btn-info btn-block" type="submit" value="Ping" />
         <input type="hidden" id="locationLat" name="locationLat" value="" /> 
         <input type="hidden" id="locationLon" name="locationLon" value="" />
            

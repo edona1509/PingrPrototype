@@ -19,7 +19,7 @@
 <nav class="navbar navbar-inverse navbar-fixed-top">
   <div class="container-fluid">
     <div class="navbar-header">
-      <a class="navbar-brand bottom" href="index.jsp">Pingr</a>
+      <a class="navbar-brand bottom" href="/PingrHib/FetchData">Pingr</a>
     
       
       <div id="floatRightBitch">
