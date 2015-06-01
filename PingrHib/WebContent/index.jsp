@@ -129,18 +129,23 @@
   	  	    var down = locations[i][4];
   	  	    var idGiusto = locations[i][6];
   	  	    var myLatLng = new google.maps.LatLng(ping[1], ping[2]);
-  	 		 
-  	  	   if( categoria =="Gossip"){
+  	   	  	      
+  	  	   		if( categoria =="Gossip"){
   	  		   	var pinImage = new google.maps.MarkerImage("http://maps.google.com/mapfiles/ms/icons/red-dot.png");
+  	  				
    	  	  	  	
    	  	  	    } else if(categoria=="News"){
-   	  	   	    var pinImage = new google.maps.MarkerImage("http://maps.google.com/mapfiles/ms/icons/green-dot.png");
+   	  	   	    var pinImage = new google.maps.MarkerImage("http://maps.google.com/mapfiles/ms/icons/blue-dot.png");
+   	  	  			
    	  	  	    	
    	  	  	    } else if (categoria == "Business"){
-   	  	  	    	var pinImage = new google.maps.MarkerImage("http://maps.google.com/mapfiles/ms/icons/blue-dot.png");
+   	  	  	    	var pinImage = new google.maps.MarkerImage("http://maps.google.com/mapfiles/ms/icons/green-dot.png");
+   	  	  				
    	  	  	    }
-  	  		var commentoGiusto = [];
-  	  	    for(var j=0; j<comments.length; j++){
+  	  		
+  	  	    var commentoGiusto = [];
+  	  	  
+  	  		for(var j=0; j<comments.length; j++){
   	  	    	var chiave = comments[j][1];
   	  	      	if (idGiusto == chiave){
   	  	      	commentoGiusto.push(comments[j][0]);
@@ -156,16 +161,18 @@
   	  	    
   	   	  	  
   	  	   	 var comment;
-  	  	  	 google.maps.event.addListener(marker, 'click',  (function(marker, showContent, up, down, idGiusto, comment, commentoGiusto) {
+  	  	  	 google.maps.event.addListener(marker, 'click',  (function(marker, showContent, up, down, idGiusto, comment, commentoGiusto, categoria) {
   	  	  	  return function() {
-  	  			    infowindow.setContent('<p>Ping: '+ showContent +'</p>'+ 
-  	                		'<p id="upFieldID"> Up: '+ '<p id="upID">'+ up +' </p>' +'</p>'+
-  	                		'<p id="downFieldID" > Down: '+ '<p id="downID">'+ down +' </p>' +'</p>'+
+  	  			    infowindow.setContent('<p><b> '+ categoria +'</b></p>' + 
+  	  			    		'<p> <u>Ping: </u> ' +  showContent +'</p>'+ 
+  	                		'<p id="upFieldID"> <u> Up votes: </u> </p>' + '<p id="upID">'+ up +' </p>'+
+  	                		'<p id="downFieldID" > <u> Down votes: </u> </p>' + '<p id="downID">'+ down +' </p>' +
   	        				'<input type="submit" id="upClick" value="Up vote" onclick="sendUpVote('+ document.getElementById('upID') + ','+ idGiusto +','+ down+')"  ></input>'+
   	          				'<input type="submit" id="downClick" value="Down vote" onclick="sendDownvote('+ document.getElementById('downID') + ','+idGiusto+ ','+ up +')" ></input>'+
-  	          				'<p> Comments: '+ commentoGiusto +'</p>' +
+  	          				'<p> </p>'+
+  	          				'<p> <u> Comments: </u> </p> <p>'+ commentoGiusto +'</p>' +
   	          				'<p id="commentID"> </p>'+
-  	          				'<p> Add a comment to this Ping!</p>' +
+  	          				'<p> <u> Add a comment to this Ping! </u></p>' +
   	          				'<textarea class="form-control" id="commentArea" rows="2"></textarea>'+
   	          				'<input type="submit" id="commentClick" value="Send comment" onclick="sendComment('+ idGiusto + ','+ comment+')" ></input>');
   	                infowindow.open(map, marker);
@@ -174,12 +181,16 @@
   	          	}
   	  	  	 
   	  	  	  
-  	  		})(marker, showContent, up, down, idGiusto, comment, commentoGiusto)); 
+  	  		})(marker, showContent, up, down, idGiusto, comment, commentoGiusto, categoria)); 
   	 	  
   	  	  }
+  	  		
   	  	}
-  	  	  
+  	  	 
+  	  	 	  	  
   	 }
+  	  
+  			
 //////////////////// Show new up vote ///////////////////  	  
   	  function retriveTheNewUpVote(idGiusto){
   		 	  	   
