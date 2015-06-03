@@ -26,15 +26,11 @@ public class SendResponseDown extends HttpServlet {
 		
 		String id = request.getParameter("idGiusto");
 		int idPing = Integer.parseInt(id);
-		System.out.println("L'id è : "+ id);
-			
+	
 		String downVote = request.getParameter("down");
-		int votoGiu = Integer.parseInt(downVote);
-		System.out.println("Voto giù è ora: "+ downVote);
-		
+		int votoGiu = Integer.parseInt(downVote);		
 		
 		List<PingrBean> pingrList = PingrManager.getAllInfo();
-			
 	 	
 	    for(int i=0;i<pingrList.size();i++){
 	   
@@ -50,13 +46,9 @@ public class SendResponseDown extends HttpServlet {
 	    	}
 	    	
 	    }
-	    //
+	    
 	   	response.setContentType("text/plain");
-		System.out.println("I'm sending from down: "+ downVote);
 		response.getWriter().write(downVote);
-		//request.setAttribute("pingrList", pingrList);
-		//request.getRequestDispatcher("index.jsp").forward(request, response);
-	   
 		
 	}
 	

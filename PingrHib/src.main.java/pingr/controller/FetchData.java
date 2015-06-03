@@ -19,6 +19,7 @@ import pingr.model.PingrManager;
 
 
 public class FetchData extends HttpServlet {
+	
 	private static final long serialVersionUID = 1L;
  
 	/**
@@ -30,29 +31,11 @@ public class FetchData extends HttpServlet {
 		List<PingrBean> pingrList = PingrManager.getAllInfo();
 		List<CommentBean> commentList = PingrManager.getAllComments();
 		
-//		for(int i=0;i<pingrList.size();i++){
-//			   
-////			int id = commentList.get(i).getCommentID();
-////			
-////			String cont = commentList.get(i).getCommentContent();
-////			
-////			PingrBean ping = commentList.get(i).getPingr();
-////			
-////			System.out.println(id);
-////			System.out.println(cont);
-////			System.out.println(ping);
-//			
-//			commentList = pingrList.get(i).getComments();
-//			
-//			
-// }		
-	
 		response.setContentType("text/html");
 		request.setAttribute("pingrList", pingrList);
 		request.setAttribute("commentList", commentList);
 		request.getRequestDispatcher("index.jsp").forward(request, response);
-		
-	
+
 		
 	}
 

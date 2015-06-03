@@ -29,31 +29,26 @@ public class PingrBeanController extends HttpServlet {
 		
 		//************* Taking the latitude and longitude from jsp form ************************//  
 		String textAreaContent = request.getParameter("content");
-		System.out.println("TESTO"+textAreaContent);
-	    String lat = request.getParameter("locationLat");
-	    System.out.println("LATITUDINEEE"+lat);
+		String lat = request.getParameter("locationLat");
 	    String lon = request.getParameter("locationLon");
-	    System.out.println("LONGITUT"+lon);
 	    String checkBox = request.getParameter("check");
-	    System.out.println("Checkbox is" + checkBox);
 	    
 		if (textAreaContent.length()<2){
 	    
-			System.out.println("Sono nell'eccezione!");
 			// Giving the response to the user redirecting them on the post2.jsp
 	    	RequestDispatcher rd1 = request.getRequestDispatcher("post2.jsp");
 			rd1.forward(request,response);
 	    }
 	    else if(lat.isEmpty() || !isDouble(lat)){
-	    	System.out.println("Sono nell'eccezione lat!");
+	    	
 			// Giving the response to the user redirecting them on the post2.jsp
 	    	RequestDispatcher rd2 = request.getRequestDispatcher("post2.jsp");
 			rd2.forward(request,response);
 	    	
 	    }
 	    else if(lon.isEmpty() || !isDouble(lon)){
-	    	System.out.println("Sono nell'eccezione lon!");
-			// Giving the response to the user redirecting them on the post2.jsp
+	    	
+	    	// Giving the response to the user redirecting them on the post2.jsp
 	    	RequestDispatcher rd3 = request.getRequestDispatcher("post2.jsp");
 			rd3.forward(request,response);
 	    }
@@ -66,10 +61,6 @@ public class PingrBeanController extends HttpServlet {
 		    
 		    System.out.println("Longitude val is: " + lon);
 		    double myLon = Double.parseDouble(lon);
-	    
-		    
-		    // In order to check if the date are in the correct format we should do it here
-		    // if not do not insert any entry in the database :D
 		    
 			pingr.setContent(textAreaContent);
 			pingr.setCategory(checkBox);

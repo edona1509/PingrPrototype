@@ -35,7 +35,6 @@ public class InfoWindowDataUpVote extends HttpServlet {
 	
 		int up = pingr.getUp_vote();
 		String voto = String.valueOf(up);
-		//System.out.println("Up in InfoWindowData: "+ up);
 		
 		response.setContentType("text/plain");
 		response.getWriter().write(voto);

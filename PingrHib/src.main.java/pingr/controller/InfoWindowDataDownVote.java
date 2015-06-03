@@ -22,8 +22,7 @@ public class InfoWindowDataDownVote extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
-		//System.out.println("Sono nel INFOWINDOWDATA");
-		
+			
 		String pingrID = request.getParameter("idGiusto");
 		int idPing = Integer.parseInt(pingrID);
 		
@@ -31,8 +30,7 @@ public class InfoWindowDataDownVote extends HttpServlet {
 	
 		int down = pingr.getDown_vote();
 		String voto = String.valueOf(down);
-		//System.out.println("Up in InfoWindowData: "+ down);
-		
+				
 		response.setContentType("text/plain");
 		response.getWriter().write(voto);
 			

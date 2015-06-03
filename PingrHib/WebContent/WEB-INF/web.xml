@@ -57,12 +57,20 @@
     <servlet-name>InfoWindowDataUpVote</servlet-name>
     <url-pattern>/InfoWindowDataUpVote</url-pattern>
   </servlet-mapping>
-   <servlet>
+  <servlet>
     <servlet-name>InfoWindowDataDownVote</servlet-name>
     <servlet-class>pingr.controller.InfoWindowDataDownVote</servlet-class>
   </servlet>
   <servlet-mapping>
     <servlet-name>InfoWindowDataDownVote</servlet-name>
     <url-pattern>/InfoWindowDataDownVote</url-pattern>
+  </servlet-mapping>
+   <servlet>
+    <servlet-name>InfoWindowDataComments</servlet-name>
+    <servlet-class>pingr.controller.InfoWindowDataComments</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>InfoWindowDataComments</servlet-name>
+    <url-pattern>/InfoWindowDataComments</url-pattern>
   </servlet-mapping>
 </web-app>

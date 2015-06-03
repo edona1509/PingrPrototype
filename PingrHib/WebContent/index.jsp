@@ -24,7 +24,6 @@
  <script type="text/javascript">
   var pings = [];
   var comments =[];
-  
   var map;
   function voteAlert() {window.alert("Thank you for voting a Ping!");}
  </script>
@@ -84,10 +83,8 @@
   
   	 var commentContent = '${commentElement.commentContent}';
 	 var foreignKey = '${commentElement.theKey}';
-	
 	 comments.push([commentContent,foreignKey]);
-   	// alert(comments);		  
-  
+    
   </script>
  </c:forEach>	
  
@@ -110,8 +107,7 @@
 		   
   		  	
   	  pings.push([content, lat, lon, cat, downvote, upvote, id]);
-   //	alert("Length of pings " + pings.length);
-  	  function setMarkers(map, locations) {
+   	  function setMarkers(map, locations) {
   	  	
   		  // Add markers to the map
   	  	  // Marker sizes are expressed as a Size of X,Y
@@ -151,8 +147,7 @@
   	  	      	commentoGiusto.push(comments[j][0]);
   	  	    	}
   	  	    
-  	  	  	    
-  	  	    var marker = new google.maps.Marker({
+ 	  	    var marker = new google.maps.Marker({
   	  	        position: myLatLng,
   	  	        map: map,
   	  	        icon: pinImage,
@@ -170,14 +165,16 @@
   	        				'<input type="submit" id="upClick" value="Up vote" onclick="sendUpVote('+ document.getElementById('upID') + ','+ idGiusto +','+ down+')"  ></input>'+
   	          				'<input type="submit" id="downClick" value="Down vote" onclick="sendDownvote('+ document.getElementById('downID') + ','+idGiusto+ ','+ up +')" ></input>'+
   	          				'<p> </p>'+
-  	          				'<p> <u> Comments: </u> </p> <p>'+ commentoGiusto +'</p>' +
-  	          				'<p id="commentID"> </p>'+
+  	          				'<p> <u> Comments:</u> </p> <p id="commentID"> </p>' +
   	          				'<p> <u> Add a comment to this Ping! </u></p>' +
   	          				'<textarea class="form-control" id="commentArea" rows="2"></textarea>'+
   	          				'<input type="submit" id="commentClick" value="Send comment" onclick="sendComment('+ idGiusto + ','+ comment+')" ></input>');
-  	                infowindow.open(map, marker);
-  	              	retriveTheNewUpVote(idGiusto);
-  	            	retriveTheNewDownVote(idGiusto);
+  	  				
+  	  			    retriveTheNewUpVote(idGiusto);
+	            	retriveTheNewDownVote(idGiusto);
+	            	retriveTheNewComments(idGiusto);
+  	  			    infowindow.open(map, marker);
+  	              
   	          	}
   	  	  	 
   	  	  	  
@@ -189,7 +186,29 @@
   	  	 
   	  	 	  	  
   	 }
-  	  
+////////////////////// Show the new comments //////////////////////////////
+	   function retriveTheNewComments(idGiusto){
+  		 	  	   
+  		var xmlhttp;
+  	  	if (window.XMLHttpRequest)
+    	  {// code for IE7+, Firefox, Chrome, Opera, Safari
+    	  xmlhttp=new XMLHttpRequest();
+    	  }
+    	else
+    	  {// code for IE6, IE5
+    	  xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
+    	  }
+    	xmlhttp.onreadystatechange=function(){
+    	
+    		$('#commentID').text(xmlhttp.responseText);
+    	  	
+    		
+    	}
+    	xmlhttp.open("GET","InfoWindowDataComments?idGiusto="+idGiusto,true);
+      	xmlhttp.send();
+  		  
+  	  } 
+   	 
   			
 //////////////////// Show new up vote ///////////////////  	  
   	  function retriveTheNewUpVote(idGiusto){
@@ -206,7 +225,7 @@
     	xmlhttp.onreadystatechange=function(){
     	
     		document.getElementById("upID").innerHTML= xmlhttp.responseText;
-    		
+    		    		
     	}
     	xmlhttp.open("GET","InfoWindowDataUpVote?idGiusto="+idGiusto,true);
       	xmlhttp.send();
@@ -223,10 +242,13 @@
     	  {// code for IE6, IE5
     	  xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
     	  }
-    	xmlhttp.onreadystatechange=function(){
-    	
+    	xmlhttp.onreadystatechange=function()
+    	{
+       	 if (xmlhttp.readyState==4 && xmlhttp.status==200)
+    	 	{
     		document.getElementById("downID").innerHTML= xmlhttp.responseText;
-    		
+    	 	}
+     		
     	}
     	xmlhttp.open("GET","InfoWindowDataDownVote?idGiusto="+idGiusto,true);
       	xmlhttp.send();
@@ -294,6 +316,7 @@
   	//////////////// SEND COMMENTS  ///////////////////////
   	function sendComment(idGiusto, content)
   	{  		
+  	
   		var currentComment = document.getElementById('commentArea').value;
   		var xmlhttp;
   	if (window.XMLHttpRequest)
@@ -309,10 +332,14 @@
   	  if (xmlhttp.readyState==4 && xmlhttp.status==200)
   	    {
   		 // alert(xmlhttp.responseText);
-  	    document.getElementById("commentID").innerHTML= xmlhttp.responseText;
-   	   
-  	    }
-  	  
+  		 if(xmlhttp.responseText){
+  			 $('#commentID').append('<br>'+ xmlhttp.responseText);
+  			 document.getElementById('commentArea').value = '';
+  	    	}
+  	      	  else {
+  		  		// do nothing!
+  	 		 }
+  	 }
   	}
   	
   	xmlhttp.open("GET","SaveComment?comment="+currentComment+"&idGiusto="+idGiusto,true);
@@ -320,7 +347,6 @@
   	
   	}
 
-  	           
     </script>
       	 </c:forEach>	
  				
