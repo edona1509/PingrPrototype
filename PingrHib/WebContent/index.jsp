@@ -300,9 +300,16 @@
   	  {
   	  if (xmlhttp.readyState==4 && xmlhttp.status==200)
   	    {
-  		
-  	    document.getElementById("downID").innerHTML= xmlhttp.responseText;
-   	   
+  		 
+  		  if((xmlhttp.responseText)=="Error"){
+  			  
+  			  alert("This Ping has received to many down votes, thus it will be deleted next time you access this page!");
+  			   			  
+  		  }
+  		  
+  		  else{
+  		  document.getElementById("downID").innerHTML= xmlhttp.responseText;
+  		  }
   	    }
   	  
   	}
@@ -312,7 +319,7 @@
   	xmlhttp.send();
   
   	}
-    	   
+    
   	//////////////// SEND COMMENTS  ///////////////////////
   	function sendComment(idGiusto, content)
   	{  		

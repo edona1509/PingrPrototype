@@ -30,6 +30,17 @@ public class SendResponseDown extends HttpServlet {
 		String downVote = request.getParameter("down");
 		int votoGiu = Integer.parseInt(downVote);		
 		
+		if (votoGiu>10){
+			
+			PingrManager.deleteComments(idPing);
+			PingrManager.deletePing(idPing);
+			
+			response.setContentType("text/plain");
+			response.getWriter().write("Error");
+		}
+		
+		else{
+			
 		List<PingrBean> pingrList = PingrManager.getAllInfo();
 	 	
 	    for(int i=0;i<pingrList.size();i++){
@@ -50,6 +61,7 @@ public class SendResponseDown extends HttpServlet {
 	   	response.setContentType("text/plain");
 		response.getWriter().write(downVote);
 		
+		}
 	}
 	
 	

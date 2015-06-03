@@ -126,7 +126,7 @@ public class PingrManager {
 		
 		return comments;
 }
-	//
+	
 	
 	public static PingrBean retrivePing(int idGiusto){
 		
@@ -143,6 +143,38 @@ public class PingrManager {
 				session.getTransaction().commit();
 		
 				return pingr;
+	}
+	
+	public static void deletePing(int idGiusto){
+		// Get Session
+		SessionFactory sessionFactory = HibernateUtil.getSessionAnnotationFactory();
+		Session session = sessionFactory.getCurrentSession();
+		// start transaction
+		session.beginTransaction();
+		
+		String hql = "DELETE FROM PingrBean WHERE pingr_id="+idGiusto;
+		Query query = session.createQuery(hql);
+		
+		int deletedPing = query.executeUpdate();
+		
+		session.getTransaction().commit();
+		
+		
+	}
+	public static void deleteComments(int idGiusto){
+		// Get Session
+		SessionFactory sessionFactory = HibernateUtil.getSessionAnnotationFactory();
+		Session session = sessionFactory.getCurrentSession();
+		// start transaction
+		session.beginTransaction();
+		
+		String hql = "DELETE FROM CommentBean WHERE thekey="+idGiusto;
+		Query query = session.createQuery(hql);
+		
+		int deletedComments = query.executeUpdate();
+		
+		session.getTransaction().commit();
+		
 	}
 	
 	
