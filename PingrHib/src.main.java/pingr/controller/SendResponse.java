@@ -76,10 +76,8 @@ public class SendResponse extends HttpServlet  {
 	    }
 	    
 	   	response.setContentType("text/plain");
-		System.out.println("I'm sending: "+ upVote);
+		//System.out.println("I'm sending: "+ upVote);
 		response.getWriter().write(upVote);
-		//request.setAttribute("pingrList", pingrList);
-		//request.getRequestDispatcher("index.jsp").forward(request, response);
 	 
 	}
 	

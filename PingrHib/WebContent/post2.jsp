@@ -97,7 +97,7 @@
     
     
    <script>
-	window.alert("Some information are missing, please authorize the location and fill all the needed infomation!");
+	window.alert("Some information are missing or wrong, please authorize the location and fill all the needed infomation!");
 	</script>
 	
 <div class="navbar navbar-inverse navbar-fixed-top" role="navigation">

@@ -15,44 +15,44 @@
     
 </head>
 <body>
-       
-<nav class="navbar navbar-inverse navbar-fixed-top">
-  <div class="container-fluid">
-    <div class="navbar-header">
-      <a class="navbar-brand bottom" href="/PingrHib/FetchData">Pingr</a>
-    
-      
-      <div id="floatRightBitch">
-    <li><a href="post.jsp"><span class="glyphicon glyphicon-pencil bigger extraP"></span></a></li>
-      </div>
-</div>
-  </div>
-</nav>
-
-
-    <div id="infoID">
-        <h3> Pingr</h3>
-        <p>Pingr is a location based web application that allows you to post pings anonomously based on your location. This is currently a prototype that will be develped into an app.</p>
+ 				
+<div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+    <div class="container">
+        <div class="navbar-header pull-left">
+     
+            <a class="navbar-brand" href="/PingrHib/FetchData">Pingr</a>
+            
         </div>
 
-    
-<nav class="navbar navbar-inverse navbar-fixed-bottom">
-  <div class="container-fluid">
-    <div class="navbar-header">
-      <a class="navbar-brand" href="#"><span class="glyphicon glyphicon-search bigger extraP"></span></a>
-    
-      
-      <div id="floatRightBitch">
-    <a href="info.jsp"><span class="glyphicon glyphicon-info-sign bigger extraP"></span></a>
-    
+		<div class="navbar-header pull-right littleP">
+            <a href="post.jsp"><span class="glyphicon glyphicon-pencil bigger extraP"></span></a>
+        </div>
     </div>
-    </div>
-  
 </div>
-</nav>
+       
+    <div id="infoID">
+        <h3> Pingr</h3>
+        <p>Pingr is a location based web application that allows you to post pings anonymously based on your location. It shows the markers of different colors based on the type of category that can be: gossip, business and news!  This is currently a prototype that will be developed into an app. The authors of this prototype are Edona Gashi and Tee Bourque. The project started at the Free University of Bolzano for the course of Internet and Mobile Services of the Faculty of Computer Science.</p>
+        </div>
 
+ <div id="map-canvas" style="height: 100%, width: 100%;"></div>
+
+
+<div class="navbar navbar-inverse navbar-fixed-bottom" role="navigation">
+    <div class="container">
+        <div class="navbar-header pull-left">
+            <a href="search.jsp" class="navbar-brand"><span class="glyphicon glyphicon-search bigger extraP"></span></a>
+        </div>
+
+		<div class="navbar-header pull-right littleP">
+            <a href="info.jsp"><span class="glyphicon glyphicon-info-sign bigger extraP"></span></a>
+            
+        </div>
+    </div>
+</div>
+    
+ 
 </body>
     
 
-</html>
-
+</html> 

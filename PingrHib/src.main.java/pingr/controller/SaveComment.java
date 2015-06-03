@@ -39,26 +39,8 @@ public class SaveComment extends HttpServlet {
 		comment.setTheKey(idPing);				
 		PingrManager.saveCommentDetails(comment);
 		
-		
-//		List<PingrBean> pingrList = PingrManager.getAllInfo();
-//		
-//		
-//		for(int i=0; i<pingrList.size(); i++){
-//			
-//			int idDellaLista = pingrList.get(i).getPingrID();
-//    	
-//					if (idDellaLista == idPing) {
-//		
-//						comment.setPingr(pingrList.get(i));
-//						comment.setCommentContent(commentFromGraphic);
-//						comment.setTheKey(idPing);
-//						PingrManager.saveCommentDetails(comment);
-//		
-//					}
-//      }
-		
-	  		response.setContentType("text/plain");
-	  		response.getWriter().write(commentFromGraphic);
+  		response.setContentType("text/plain");
+  		response.getWriter().write(commentFromGraphic);
 	  		
 			//request.setAttribute("pingrList", pingrList);
 			//request.getRequestDispatcher("index.jsp").forward(request, response);
