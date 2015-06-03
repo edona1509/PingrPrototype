@@ -9,8 +9,8 @@
   <title>Pingr</title>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="booty.css">
-    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css"> 
+  <link rel="stylesheet" href="booty.css">
+  <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css"> 
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
  
   <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
@@ -183,8 +183,7 @@
   	  	  }
   	  		
   	  	}
-  	  	 
-  	  	 	  	  
+  	 	  	  
   	 }
 ////////////////////// Show the new comments //////////////////////////////
 	   function retriveTheNewComments(idGiusto){
@@ -303,8 +302,8 @@
   		 
   		  if((xmlhttp.responseText)=="Error"){
   			  
-  			  alert("This Ping has received to many down votes, thus it will be deleted next time you access this page!");
-  			   			  
+  			alert("This Ping has received to many down votes, thus it will be deleted!");
+  			document.forms["myForm"].submit();
   		  }
   		  
   		  else{
@@ -357,6 +356,8 @@
     </script>
       	 </c:forEach>	
  				
+ 	<form method="get" action="/PingrHib/FetchData" id="myForm">  
+ 	</form>
 <div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
     <div class="container">
         <div class="navbar-header pull-left">

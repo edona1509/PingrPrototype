@@ -52,8 +52,7 @@ public class SendResponseDown extends HttpServlet {
 	    		pingrList.get(i).setDown_vote(votoGiu);
 	    			    		
 	    		PingrManager.savePingrElementsDOWN(idPing, votoGiu);
-	    		
-	    	
+	    			    	
 	    	}
 	    	
 	    }
