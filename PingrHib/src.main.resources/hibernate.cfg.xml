@@ -8,7 +8,7 @@
 		<property name="hibernate.connection.driver_class">org.postgresql.Driver</property>
 		<property name="hibernate.connection.url">jdbc:postgresql://localhost:5432/postgres</property>
 		<property name="hibernate.connection.username">postgres</property>
-		<property name="hibernate.connection.password">cofc1994?</property>
+		<property name="hibernate.connection.password">loistvtb</property>
 		<!-- Connection Pool Size -->
 		<property name="hibernate.connection.pool_size">1</property>
 
@@ -31,7 +31,7 @@
 		
 		
 		<mapping class="pingr.model.PingrBean" />
-		<mapping class="pingr.model.CommentBean" />
+		<mapping class="pingr.model.CommentBean"  />
 		
 		
 	</session-factory>
