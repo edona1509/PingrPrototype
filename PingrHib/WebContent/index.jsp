@@ -84,7 +84,7 @@
   	 var commentContent = '${commentElement.commentContent}';
 	 var foreignKey = '${commentElement.theKey}';
 	 comments.push([commentContent,foreignKey]);
-    
+	
   </script>
  </c:forEach>	
  
@@ -105,7 +105,7 @@
   			 var lon = '${element.longitude}';
   			 var content = '${element.content}';
 		   
-  		  	
+  	    	
   	  pings.push([content, lat, lon, cat, downvote, upvote, id]);
    	  function setMarkers(map, locations) {
   	  	
@@ -148,13 +148,14 @@
   	  	    	}
   	  	    
  	  	    var marker = new google.maps.Marker({
-  	  	        position: myLatLng,
+ 	  	    
+ 	  	    	position: myLatLng,
   	  	        map: map,
   	  	        icon: pinImage,
   	  	        infowindow: infowindow
-  	  	    });
-  	  	    
-  	   	  	  
+  	  	    });	
+ 	  	  	  	 
+ 	  		
   	  	   	 var comment;
   	  	  	 google.maps.event.addListener(marker, 'click',  (function(marker, showContent, up, down, idGiusto, comment, commentoGiusto, categoria) {
   	  	  	  return function() {
@@ -180,8 +181,9 @@
   	  	  	  
   	  		})(marker, showContent, up, down, idGiusto, comment, commentoGiusto, categoria)); 
   	 	  
-  	  	  }
+  	  	  	 
   	  		
+  	  	  }
   	  	}
   	 	  	  
   	 }
@@ -198,10 +200,9 @@
     	  xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
     	  }
     	xmlhttp.onreadystatechange=function(){
-    	
-    		$('#commentID').text(xmlhttp.responseText);
-    	  	
     		
+    		document.getElementById("commentID").innerHTML = xmlhttp.responseText;
+    		 		    	      		
     	}
     	xmlhttp.open("GET","InfoWindowDataComments?idGiusto="+idGiusto,true);
       	xmlhttp.send();
@@ -304,6 +305,7 @@
   			  
   			alert("This Ping has received to many down votes, thus it will be deleted!");
   			document.forms["myForm"].submit();
+  			      			
   		  }
   		  
   		  else{
@@ -318,8 +320,8 @@
   	xmlhttp.send();
   
   	}
-    
-  	//////////////// SEND COMMENTS  ///////////////////////
+ 
+  //////////////// SEND COMMENTS  ///////////////////////
   	function sendComment(idGiusto, content)
   	{  		
   	
@@ -339,13 +341,13 @@
   	    {
   		 // alert(xmlhttp.responseText);
   		 if(xmlhttp.responseText){
-  			 $('#commentID').append('<br>'+ xmlhttp.responseText);
+  			 $('#commentID').append(xmlhttp.responseText);
   			 document.getElementById('commentArea').value = '';
   	    	}
   	      	  else {
   		  		// do nothing!
   	 		 }
-  	 }
+  		 }
   	}
   	
   	xmlhttp.open("GET","SaveComment?comment="+currentComment+"&idGiusto="+idGiusto,true);
@@ -356,7 +358,8 @@
     </script>
       	 </c:forEach>	
  				
- 	<form method="get" action="/PingrHib/FetchData" id="myForm">  
+ 	<form method="get" action="/PingrHib/FetchData" id="myForm">
+ 	
  	</form>
 <div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
     <div class="container">

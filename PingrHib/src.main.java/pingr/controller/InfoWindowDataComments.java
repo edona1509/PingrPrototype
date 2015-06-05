@@ -40,7 +40,7 @@ public class InfoWindowDataComments extends HttpServlet {
 			String contenuto = comments.get(i).getCommentContent();
 						
 			response.setContentType("text/plain");
-			response.getWriter().write(contenuto + "\n---\n");
+			response.getWriter().write(contenuto + "<br>");
 			
 			}
 		}
