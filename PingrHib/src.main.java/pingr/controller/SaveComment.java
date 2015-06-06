@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import pingr.model.PingrBean;
 import pingr.model.PingrManager;
+import pingr.util.ServletUtilities;
 
 /**
  * Servlet implementation class SaveComment
@@ -25,7 +26,7 @@ public class SaveComment extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 		
-		String commentFromGraphic = request.getParameter("comment");
+		String commentFromGraphic = ServletUtilities.filter(request.getParameter("comment"));
 						
 		String pingrID = request.getParameter("idGiusto");
 		int idPing = Integer.parseInt(pingrID);
