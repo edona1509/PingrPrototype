@@ -2,6 +2,7 @@ package pingr.controller;
 
 
 import pingr.model.PingrManager;
+import pingr.util.ServletUtilities;
 
 import java.io.IOException;
 
@@ -28,7 +29,7 @@ public class PingrBeanController extends HttpServlet {
 		
 		
 		//************* Taking the latitude and longitude from jsp form ************************//  
-		String textAreaContent = request.getParameter("content");
+		String textAreaContent = ServletUtilities.filter(request.getParameter("content"));
 		String lat = request.getParameter("locationLat");
 	    String lon = request.getParameter("locationLon");
 	    String checkBox = request.getParameter("check");
