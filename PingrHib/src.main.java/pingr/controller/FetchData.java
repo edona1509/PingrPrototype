@@ -8,6 +8,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import pingr.model.CommentBean;
 import pingr.model.PingrBean;
@@ -30,6 +31,10 @@ public class FetchData extends HttpServlet {
 		
 		List<PingrBean> pingrList = PingrManager.getAllInfo();
 		List<CommentBean> commentList = PingrManager.getAllComments();
+		
+//		HttpSession session = request.getSession();
+//		session.setAttribute("pingrList", pingrList);
+//		session.setAttribute("commentList", commentList);
 		
 		response.setContentType("text/html");
 		request.setAttribute("pingrList", pingrList);

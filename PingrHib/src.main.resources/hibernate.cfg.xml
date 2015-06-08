@@ -6,9 +6,9 @@
 	<session-factory>
 		<!-- Database connection properties - Driver, URL, user, password -->
 		<property name="hibernate.connection.driver_class">org.postgresql.Driver</property>
-		<property name="hibernate.connection.url">jdbc:postgresql://localhost:5432/postgres</property>
-		<property name="hibernate.connection.username">postgres</property>
-		<property name="hibernate.connection.password">loistvtb</property>
+		<property name="hibernate.connection.url">jdbc:postgresql://alcor.inf.unibz.it:5432/ims_group2</property>
+		<property name="hibernate.connection.username">egashi</property>
+		<property name="hibernate.connection.password">haveaniceday</property>
 		<!-- Connection Pool Size -->
 		<property name="hibernate.connection.pool_size">1</property>
 

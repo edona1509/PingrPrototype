@@ -24,6 +24,8 @@
   var comments =[];
   var map;
   function voteAlert() {window.alert("Thank you for voting a Ping!");}
+
+ 
  </script>
   
      
@@ -106,7 +108,7 @@
   	  			    		'<p> <u>Ping: </u> ' +  showContent +'</p>'+ 
   	                		'<p id="upFieldID"> <u> Up votes: </u> </p>' + '<p id="upID">'+ up +' </p>'+
   	                		'<p id="downFieldID" > <u> Down votes: </u> </p>' + '<p id="downID">'+ down +' </p>' +
-  	        				'<input type="submit" id="upClick" value="Up vote" onclick="sendUpVote('+ document.getElementById('upID') + ','+ idGiusto +','+ down+')"  ></input>'+
+  	        				'<input type="submit" id="upClick" value="Up vote" onclick="sendUpVote('+ document.getElementById('upID') + ','+ idGiusto +','+ down+')" ></input>'+
   	          				'<input type="submit" id="downClick" value="Down vote" onclick="sendDownvote('+ document.getElementById('downID') + ','+idGiusto+ ','+ up +')" ></input>'+
   	          				'<p> </p>'+
   	          				'<p> <u> Comments:</u> </p> <p id="commentID"> </p>' +
@@ -131,10 +133,12 @@
 			  	    if (idGiusto == chiave){
 			  	    commentoGiusto.push(comments[j][0]);
 			  	    }
-	  		  }
+	  		}
+	  		
   	  	}
   	 	  	  
-  	 }
+  	}
+
 ////////////////////// Show the new comments //////////////////////////////
 	   function retriveTheNewComments(idGiusto){
   		 	  	   
@@ -150,6 +154,7 @@
     	xmlhttp.onreadystatechange=function(){
     		
     		document.getElementById("commentID").innerHTML = xmlhttp.responseText;
+    		
     		 		    	      		
     	}
     	xmlhttp.open("GET","InfoWindowDataComments?idGiusto="+idGiusto,true);
@@ -202,6 +207,12 @@
       	xmlhttp.send();
   		  
   	  }
+ 
+ 	$.prototype.disable = function () {
+  	    $.each(this, function (index, el) {
+  	        $(el).attr('disabled', 'disabled');
+  	    });
+  	}
   ////////////////////////////////// UP VOTE /////////////////////////////
   	function sendUpVote(upVooote, idGiusto, down)
   	{  		
@@ -220,15 +231,23 @@
   	  {
   	  if (xmlhttp.readyState==4 && xmlhttp.status==200)
   	    {
+  		
+  		$("#upClick").disable();
   	    document.getElementById("upID").innerHTML= xmlhttp.responseText;
-  	   
+  	 //	document.getElementById("upClick").disable = true ;
+  	 
   	    }
   	  
   	}
   	currentUpVote++;
+  	
   	xmlhttp.open("GET","SendResponse?up="+currentUpVote+"&down="+down+"&idGiusto="+idGiusto,true);
   	xmlhttp.send();
+  	
+  	
   	}
+  
+
   	   
   	//////////////// DOWN VOTE ///////////////////////
   	function sendDownvote(downVooote, idGiusto, up)
@@ -250,22 +269,26 @@
   	    {
   		 
   		  if((xmlhttp.responseText)=="Error"){
-  			  
+  			
   			alert("This Ping has received to many down votes, thus it will be deleted!");
   			document.forms["myForm"].submit();
   			      			
   		  }
   		  
   		  else{
-  		  document.getElementById("downID").innerHTML= xmlhttp.responseText;
+  		//  document.getElementById("downClick").disabled = true;
+  		  $("#downClick").disable();  
+  	     document.getElementById("downID").innerHTML= xmlhttp.responseText;
   		  }
   	    }
   	  
   	}
   	
   	currentDownVote++;
+  
   	xmlhttp.open("GET","SendResponseDown?down="+currentDownVote+"&up="+up+"&idGiusto="+idGiusto,true);
   	xmlhttp.send();
+  	
   
   	}
  
@@ -289,7 +312,7 @@
   	    {
   		 // alert(xmlhttp.responseText);
   		 if(xmlhttp.responseText){
-  			 $('#commentID').append(xmlhttp.responseText);
+  			 $('#commentID').append("-" +xmlhttp.responseText);
   			 document.getElementById('commentArea').value = '';
   	    	}
   	      	  else {
@@ -305,6 +328,8 @@
 
     </script>
       	 </c:forEach>	
+      	 
+   
  				
  	<form method="get" action="/PingrHib/FetchData" id="myForm">
  	
