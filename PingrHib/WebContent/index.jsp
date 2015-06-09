@@ -247,8 +247,6 @@
   	
   	}
   
-
-  	   
   	//////////////// DOWN VOTE ///////////////////////
   	function sendDownvote(downVooote, idGiusto, up)
   	{  		

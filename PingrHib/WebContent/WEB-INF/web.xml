@@ -60,7 +60,7 @@
     <servlet-name>InfoWindowDataDownVote</servlet-name>
     <url-pattern>/InfoWindowDataDownVote</url-pattern>
   </servlet-mapping>
-   <servlet>
+  <servlet>
     <servlet-name>InfoWindowDataComments</servlet-name>
     <servlet-class>pingr.controller.InfoWindowDataComments</servlet-class>
   </servlet>

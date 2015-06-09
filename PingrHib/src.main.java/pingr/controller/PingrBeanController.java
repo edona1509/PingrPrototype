@@ -72,8 +72,9 @@ public class PingrBeanController extends HttpServlet {
 			PingrManager.savePingrDetails(pingr);
 			
 			// Giving the response to the user redirecting them on the FetchData Servlet!
-			RequestDispatcher rd = request.getRequestDispatcher("FetchData");
-		    rd.forward(request,response);
+			
+			response.setContentType("text/html");
+			response.sendRedirect("FetchData");
 	    }
 	     else{
 	 	    	System.out.println("ultimo else");
