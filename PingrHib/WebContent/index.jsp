@@ -13,8 +13,8 @@
   <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css"> 
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
   <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
-  <script src="https://maps.googleapis.com/maps/api/js"> </script>
   <script src="http://code.jquery.com/jquery-1.10.2.js"></script>
+  <script src="https://maps.googleapis.com/maps/api/js?v=3.exp&signed_in=true&libraries=places"></script>	
    
 </head>
 <body>
@@ -23,13 +23,12 @@
   var pings = [];
   var comments =[];
   var map;
-  function voteAlert() {window.alert("Thank you for voting a Ping!");}
+  function voteAlert() {window.alert("Thank you for Posting a Ping!");}
 
- 
  </script>
   
      
-<script src="loadMap.js"></script> 
+<script src="map.js"></script> 
   
   <c:forEach items="${commentList}" var="commentElement">  
   <script type="text/javascript">
@@ -247,6 +246,8 @@
   	
   	}
   
+
+  	   
   	//////////////// DOWN VOTE ///////////////////////
   	function sendDownvote(downVooote, idGiusto, up)
   	{  		
@@ -327,6 +328,8 @@
     </script>
       	 </c:forEach>	
       	 
+      	 
+      	 
    
  				
  	<form method="get" action="/PingrHib/FetchData" id="myForm">
@@ -339,24 +342,26 @@
             <a class="navbar-brand" href="/PingrHib/FetchData">Pingr</a>
             
         </div>
+        
+        
 
 		<div class="navbar-header pull-right littleP">
             <a href="post.jsp"><span class="glyphicon glyphicon-pencil bigger extraP"></span></a>
         </div>
     </div>
 </div>
-       
+  	
+    <div id="searchBar">  
+	<input id="pac-input" class="controls" type="text" placeholder="Search" ><!-- style="display:none" -->
+   </div>      
 
  <div id="map-canvas" style="height: 100%, width: 100%;"></div>
 
 
 <div class="navbar navbar-inverse navbar-fixed-bottom" role="navigation">
     <div class="container">
-        <div class="navbar-header pull-left">
-            <a href="search.jsp" class="navbar-brand"><span class="glyphicon glyphicon-search bigger extraP"></span></a>
-        </div>
 
-		<div class="navbar-header pull-right littleP">
+		<div class="navbar-header pull-left littleP">
             <a href="info.jsp"><span class="glyphicon glyphicon-info-sign bigger extraP"></span></a>
             
         </div>
