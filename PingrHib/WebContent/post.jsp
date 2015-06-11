@@ -136,11 +136,8 @@
     
 <div class="navbar navbar-inverse navbar-fixed-bottom" role="navigation">
     <div class="container">
-        <div class="navbar-header pull-left">
-            <a href="search.jsp" class="navbar-brand"><span class="glyphicon glyphicon-search bigger extraP"></span></a>
-        </div>
 
-		<div class="navbar-header pull-right littleP">
+		<div class="navbar-header pull-left littleP">
             <a href="info.jsp"><span class="glyphicon glyphicon-info-sign bigger extraP"></span></a>
             
         </div>
